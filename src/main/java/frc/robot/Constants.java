@@ -10,6 +10,9 @@ public final class Constants {
 
     // The id for the joystick 
     public static final int joystick = 0;
+
+    // The id for the XboxController
+    public static final int xboxController = 1;
     
     // Constants for movement  
     public enum DriveMode {

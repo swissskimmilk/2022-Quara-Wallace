@@ -9,6 +9,9 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -33,11 +36,26 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    
+    // Create controller objects 
+    RobotContainer.xController = new XboxController(Constants.xboxController);
     RobotContainer.joystick = new Joystick(Constants.joystick);
+
+    // Create move system 
+    RobotContainer.drivetrain = new Drivetrain();
+    RobotContainer.move = new Move(RobotContainer.drivetrain);
+    
+    // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
     RobotContainer.leftLeader = new WPI_VictorSPX(Constants.LeftLeader);
     RobotContainer.rightFollower = new WPI_VictorSPX(Constants.RightFollower);
     RobotContainer.leftFollower = new WPI_VictorSPX(Constants.LeftFollower);
+    
+    // Create groups and diffDrive 
+    RobotContainer.rightGroup = new MotorControllerGroup(RobotContainer.rightLeader, RobotContainer.rightFollower);
+    RobotContainer.leftGroup = new MotorControllerGroup(RobotContainer.leftLeader, RobotContainer.leftFollower);
+    RobotContainer.myRobot = new DifferentialDrive(RobotContainer.leftGroup, RobotContainer.rightGroup);
+    
     m_robotContainer = new RobotContainer();
   }
 
