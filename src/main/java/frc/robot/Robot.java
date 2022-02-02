@@ -4,9 +4,15 @@
 
 package frc.robot;
 
+// Imports subsystems and commands 
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -27,6 +33,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    RobotContainer.joystick = new Joystick(Constants.joystick);
+    RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
+    RobotContainer.leftLeader = new WPI_VictorSPX(Constants.LeftLeader);
+    RobotContainer.rightFollower = new WPI_VictorSPX(Constants.RightFollower);
+    RobotContainer.leftFollower = new WPI_VictorSPX(Constants.LeftFollower);
     m_robotContainer = new RobotContainer();
   }
 
@@ -54,15 +65,15 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {}
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
-  @Override
-  public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+  // @Override
+  // public void autonomousInit() {
+  //   m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
-  }
+  //   // schedule the autonomous command (example)
+  //   if (m_autonomousCommand != null) {
+  //     m_autonomousCommand.schedule();
+  //   }
+  // }
 
   /** This function is called periodically during autonomous. */
   @Override
