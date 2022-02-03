@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import java.util.Map;
+
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -10,7 +12,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class Move extends CommandBase {
   private double spdMult = Constants.defSpdMult;
-  private double rotMult = Constants.defRotMult;
+  private double rotMult = Constants.detRotMult;
   private DriveMode driveMode = Constants.defDriveMode;
   public Drivetrain drivetrain;
 
@@ -27,38 +29,24 @@ public class Move extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Switch speed 
-    if(RobotContainer.joystick.getRawButtonPressed(8))
+    // Switch speed by iterating over the map and checking if any of the buttons is pressed
+    for (Map.Entry<Integer,Double> entry : Constants.speedMults.entrySet())
     {
-      spdMult = 0.5;
-      System.out.println(spdMult);
-    }
-    else if(RobotContainer.joystick.getRawButtonPressed(10))
-    {
-      spdMult = 0.7;
-      System.out.println(spdMult);
-    }
-    else if(RobotContainer.joystick.getRawButtonPressed(12))
-    {
-      spdMult = 1.0;
-      System.out.println(spdMult);
+      if (RobotContainer.joystick.getRawButtonPressed(entry.getKey()))
+      {
+        spdMult = entry.getValue();
+        System.out.println("Speed mult changed to: " + spdMult);
+      }
     }
 
-    // Switch rotation speed 
-    if(RobotContainer.joystick.getRawButtonPressed(7))
+    // Switch rotation speed by iterating over the map and checking if any of the buttons is pressed
+    for (Map.Entry<Integer,Double> entry : Constants.rotMults.entrySet())
     {
-      rotMult = -0.5;
-      System.out.println(rotMult);
-    }
-    else if(RobotContainer.joystick.getRawButtonPressed(9))
-    {
-      rotMult = -0.75;
-      System.out.println(rotMult);
-    }
-    else if(RobotContainer.joystick.getRawButtonPressed(11))
-    {
-      rotMult = -1;
-      System.out.println(rotMult);
+      if (RobotContainer.joystick.getRawButtonPressed(entry.getKey()))
+      {
+        rotMult = entry.getValue();
+        System.out.println("Rot mult changed to: " + rotMult);
+      }
     }
     
     // Switch driveMode
