@@ -22,6 +22,6 @@ public final class Constants {
     // WPI removed the functionality to change between joysticks with a constant 
     // Determines which DriveMode is the default on startup 
     public static final DriveMode defDriveMode = DriveMode.arcadeDrive;
-    public static final double defSpdMult = -0.75;
-    public static final double defRotMult = -0.75;
+    public static final double defSpdMult = -0.5;
+    public static final double defRotMult = -0.5;
 }

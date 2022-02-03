@@ -75,14 +75,15 @@ public class Move extends CommandBase {
 
     // Calls a function to move the robot depending on the driveMode constant 
     if (driveMode == DriveMode.arcadeDrive) {
-      double speed = RobotContainer.xController.getLeftY();
-      double rotation = RobotContainer.xController.getLeftX();
+      double speed = RobotContainer.xController.getLeftX();
+      double rotation = RobotContainer.xController.getLeftY();
       RobotContainer.myRobot.arcadeDrive(spdMult * speed, rotation * rotMult);
       //System.out.println("Speed: " + speed + " | Rotation: " + rotation + " | Speed Mult: " + spdMult);
     }
     else if (driveMode == DriveMode.tankDrive) {
       double left = RobotContainer.xController.getLeftY();
-      double right = RobotContainer.xController.getLeftX();
+      // Needs to be negative or else it goes backwards... 
+      double right = -RobotContainer.xController.getRightY();
       RobotContainer.myRobot.tankDrive(spdMult * left,spdMult * right);
     }
   }
