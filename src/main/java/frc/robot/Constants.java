@@ -29,17 +29,17 @@ public final class Constants {
     // Key is the button and the value is the mult 
     public static final Map<Integer, Double> speedMults = new HashMap<>();
     static {
-        speedMults.put(8, 0.4);
-        speedMults.put(10, 0.5);
-        speedMults.put(12, 0.6);
+        speedMults.put(8, -0.5);
+        speedMults.put(10, -0.75);
+        speedMults.put(12, -0.9);
     }
     public static final Map<Integer, Double> rotMults = new HashMap<>();
     static {
-        speedMults.put(7, -0.4);
-        speedMults.put(9, -0.5);
-        speedMults.put(10, -0.6);
+        rotMults.put(7, 0.5);
+        rotMults.put(9, 0.6);
+        rotMults.put(11, 0.7);
     }
     
-    public static final double defSpdMult = 0.5;
-    public static final double detRotMult = -0.5;
+    public static final double defSpdMult = -0.75;
+    public static final double detRotMult = 0.6;
 }
