@@ -48,8 +48,12 @@ public class Center extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error = angle - RobotContainer.ADIS_IMU.getAngle();
-    RobotContainer.myRobot.arcadeDrive(subsysIMU.kP * error / 180, 0);
+    if (RobotContainer.ADIS_IMU.getAngle() >= 270) {
+      error = 360 - RobotContainer.ADIS_IMU.getAngle() + angle;
+    } else {
+      error = angle - RobotContainer.ADIS_IMU.getAngle();
+    }
+    RobotContainer.myRobot.arcadeDrive(-subsysIMU.kP * error / 180, 0);
   }
 
   // Called once the command ends or is interrupted.
