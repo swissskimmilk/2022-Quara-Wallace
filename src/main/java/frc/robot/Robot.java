@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
@@ -41,10 +41,23 @@ public class Robot extends TimedRobot {
     RobotContainer.xController = new XboxController(Constants.xboxController);
     RobotContainer.joystick = new Joystick(Constants.joystick);
 
+    // buttons
+    RobotContainer.xButtonLeftTurn = new JoystickButton(RobotContainer.xController, Constants.leftTurnButton);
+    RobotContainer.xButtonRightTurn = new JoystickButton(RobotContainer.xController, Constants.rightTurnButton);
+    RobotContainer.xButtonCenter = new JoystickButton(RobotContainer.xController, Constants.centerButton);
+    
+    // imu subsystem
+    RobotContainer.IMU = new IMU();
+    
+    // the actual imu 
+    ADIS16470_IMU RobotContainter.ADIS_IMU = new ADIS16470_IMU();
+
     // Create move system 
     RobotContainer.drivetrain = new Drivetrain();
     RobotContainer.move = new Move(RobotContainer.drivetrain);
-    
+    RobotContainer.drivetrain.initDefaultCommand(RobotContainer.move);
+    RobotContainer.turn = new Turn(RobotContainer.drivetrain, RobotContainer.IMU);
+
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
     RobotContainer.leftLeader = new WPI_VictorSPX(Constants.LeftLeader);
@@ -55,7 +68,7 @@ public class Robot extends TimedRobot {
     RobotContainer.rightGroup = new MotorControllerGroup(RobotContainer.rightLeader, RobotContainer.rightFollower);
     RobotContainer.leftGroup = new MotorControllerGroup(RobotContainer.leftLeader, RobotContainer.leftFollower);
     RobotContainer.myRobot = new DifferentialDrive(RobotContainer.leftGroup, RobotContainer.rightGroup);
-    
+
     m_robotContainer = new RobotContainer();
   }
 

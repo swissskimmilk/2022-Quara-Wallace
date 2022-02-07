@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 //This class is where the bulk of the robot should be declared.
 public class RobotContainer {
 
@@ -18,9 +21,23 @@ public class RobotContainer {
   public static Joystick joystick;
   public static XboxController xController;
 
+  // buttons for bindings
+  public static JoystickButton xButtonLeftTurn;
+  public static JoystickButton xButtonRightTurn;
+  public static JoystickButton xButtonCenter;
+  
+  // imu subsystem
+  public static IMU IMU;
+
+  // actual imu
+  public static ADIS16470_IMU ADIS_IMU;
+
   // Movement system
   public static Drivetrain drivetrain;
   public static Move move;
+  public static LeftTurn leftTurn;
+  public static RightTurn rightTurn;
+  public static Center center;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
@@ -47,7 +64,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    xButtonLeftTurn.whenPressed(leftTurn);
+    xButtonRightTurn.whenPressed(rightTurn);
+    xButtonCenter.whenPressed(center);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

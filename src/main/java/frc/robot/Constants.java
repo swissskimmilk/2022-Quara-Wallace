@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.util.HashMap;
 import java.util.Map;
+import edu.wpi.first.wpilibj.XboxController;
 
 // Stores constants (duh)
 public final class Constants {
@@ -13,6 +14,11 @@ public final class Constants {
 
     // The id for the joystick 
     public static final int joystick = 0;
+
+    // joystick button ids
+    public static final int leftTurnButton = XboxController.Button.kLeftBumper; // 5
+    public static final int rightTurnButton = XboxController.Button.kRightBumper; // 6
+    public static final int centerButton = XboxController.Button.kLeftstick; // 9
 
     // The id for the XboxController
     public static final int xboxController = 1;
