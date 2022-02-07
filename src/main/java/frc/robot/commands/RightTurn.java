@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import java.lang.Math;
 
 public class RightTurn extends CommandBase {
-  // The gain for a simple P loop
-  double kP = 1;
-  
   // initial angle of robot
   double angle;
  
@@ -30,6 +27,7 @@ public class RightTurn extends CommandBase {
     drivetrain = mDrivetrain;
     subsysIMU = mIMU;
     addRequirements(drivetrain, subsysIMU);
+    // limit angle from 0 to 360, must convert 
     if (RobotContainer.ADIS_IMU.getAngle() < 90) {
       angle = 360 - RobotContainer.ADIS_IMU.getAngle() - 90;
     } else {
@@ -46,11 +44,11 @@ public class RightTurn extends CommandBase {
   @Override
   public void execute() {
     if (RobotContainer.ADIS_IMU.getAngle() < 90) {
-      error = 360 - angle + RobotContainer.ADIS_IMU.getAngle();
+      error = 360 - RobotContainer.ADIS_IMU.getAngle() + angle;
     } else {
       error = angle - RobotContainer.ADIS_IMU.getAngle();
     }
-    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 360, 0);
+    RobotContainer.myRobot.arcadeDrive(-(subsysIMU.kP * error) / 180, 0);
   }
 
   // Called once the command ends or is interrupted.
