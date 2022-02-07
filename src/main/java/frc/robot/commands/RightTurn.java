@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import java.lang.Math;
 
 public class RightTurn extends CommandBase {
-  // initial angle of robot
+  // the angle we want
   double angle;
  
   // distance left to turn
