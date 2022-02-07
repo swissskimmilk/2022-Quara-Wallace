@@ -11,6 +11,7 @@ import frc.robot.Constants.DriveMode;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import java.lang.Math;
 
 public class LeftTurn extends CommandBase {
   public Drivetrain drivetrain;
@@ -35,12 +36,12 @@ public class LeftTurn extends CommandBase {
   @Override
   public void execute() {
     if (angle >= 270) {
-      error = abs(360 - RobotContainer.ADIS_IMU.getAngle()) + angle;
+      error = 360 - RobotContainer.ADIS_IMU.getAngle() + angle;
     } else {
       error = (angle - RobotContainer.ADIS_IMU.getAngle());
     }
-    // i think right is not inverted so negative is positive is negative, 180 is just to damp the speed
-    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 180, 0);
+    // 180 is just to damp the speed
+    RobotContainer.myRobot.arcadeDrive(-(subsysIMU.kP * error) / 180, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -50,7 +51,7 @@ public class LeftTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (abs(error) <= 2) {
+    if (Math.abs(error) <= 2) {
       return true;
     } else {
       return false;
