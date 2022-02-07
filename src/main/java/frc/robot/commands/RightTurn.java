@@ -58,7 +58,7 @@ public class RightTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (abs(error) <= 2) {
+    if (Math.abs(error) <= 2) {
       return true;
     } else {
       return false;
