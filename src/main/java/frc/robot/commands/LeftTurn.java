@@ -13,16 +13,17 @@ import frc.robot.subsystems.IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
 public class LeftTurn extends CommandBase {
-  // distance left to turn
-  double error = 90;
-
   public Drivetrain drivetrain;
   public IMU ADIS_IMU;
-
+  public double angle;
+  public double error;
+  
   public LeftTurn(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
     subsysIMU = mIMU;
     addRequirements(drivetrain, subsysIMU);
+    // the angle we want
+    double angle = (90 + RobotContainer.ADIS_IMU.getAngle()) % 360;
   }
 
   // Called when the command is initially scheduled.
@@ -33,9 +34,13 @@ public class LeftTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error += RobotContainer.ADIS_IMU.getAngle();
+    if (angle >= 270) {
+      error = abs(360 - angle) + RobotContainer.ADIS_IMU.getAngle();
+    } else {
+      error = (angle - RobotContainer.ADIS_IMU.getAngle());
+    }
     // i think right is not inverted so negative is positive is negative
-    RobotContainer.myRobot.arcadeDrive(0, subsysIMU.kP * error);
+    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 360, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -45,7 +50,7 @@ public class LeftTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (error <= 4 && error >= -4) {
+    if (abs(error) <= 2) {
       return true;
     } else {
       return false;
