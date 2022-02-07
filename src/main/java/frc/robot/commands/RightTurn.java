@@ -48,7 +48,7 @@ public class RightTurn extends CommandBase {
     } else {
       error = angle - RobotContainer.ADIS_IMU.getAngle();
     }
-    RobotContainer.myRobot.arcadeDrive(-(subsysIMU.kP * error) / 180, 0);
+    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 180, 0);
   }
 
   // Called once the command ends or is interrupted.
