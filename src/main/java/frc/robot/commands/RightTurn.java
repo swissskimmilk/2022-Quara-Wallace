@@ -11,12 +11,17 @@ import frc.robot.Constants.DriveMode;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import java.lang.Math;
 
-public class LeftTurn extends CommandBase {
+public class RightTurn extends CommandBase {
   // The gain for a simple P loop
   double kP = 1;
+  
+  // initial angle of robot
+  double angle;
+ 
   // distance left to turn
-  double error = 90;
+  double error;
 
   public Drivetrain drivetrain;
   public IMU subsysIMU;
@@ -25,6 +30,11 @@ public class LeftTurn extends CommandBase {
     drivetrain = mDrivetrain;
     subsysIMU = mIMU;
     addRequirements(drivetrain, subsysIMU);
+    if (RobotContainer.ADIS_IMU.getAngle() < 90) {
+      angle = 360 - RobotContainer.ADIS_IMU.getAngle() - 90;
+    } else {
+      angle = RobotContainer.ADIS_IMU.getAngle() - 90;
+    }
   }
 
   // Called when the command is initially scheduled.
@@ -35,8 +45,12 @@ public class LeftTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error += RobotContainer.ADIS_IMU.getAngle();
-    RobotContainer.myRobot.arcadeDrive(0, subsysIMU.kP * error);
+    if (RobotContainer.ADIS_IMU.getAngle() < 90) {
+      error = 360 - angle + RobotContainer.ADIS_IMU.getAngle();
+    } else {
+      error = angle - RobotContainer.ADIS_IMU.getAngle();
+    }
+    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 360, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -46,7 +60,7 @@ public class LeftTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (error <= 4 && error >= -4) {
+    if (abs(error) <= 2) {
       return true;
     } else {
       return false;
