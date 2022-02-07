@@ -11,10 +11,15 @@ import frc.robot.Constants.DriveMode;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import java.lang.Math;
 
 public class Center extends CommandBase {
+  // desired angle of robot
+  double angle;
+  
   // distance left to center
   double error;
+  
   IMU subsysIMU;
   Drivetrain drivetrain;
 
@@ -22,6 +27,17 @@ public class Center extends CommandBase {
     drivetrain = mDrivetrain;
     subsysIMU = mIMU;
     addRequirements(mDrivetrain, subsysIMU);
+    double initAngle = RobotContainer.ADIS_IMU.getAngle();
+    // find which angle (0, 90, 180, 270) robot is closest to
+    if (initAngle >= 315 || initAngle <= 45) {
+      angle = 0.0;
+    } else if (initAngle > 45 || initAngle <= 135) {
+      angle = 90.0;
+    } else if (initAngle > 135 || initAngle <= 225) {
+      angle = 180.0;
+    } else if (initAngle > 225 || initANgle < 315){
+      angle = 270.0;
+    }
   }
 
   // Called when the command is initially scheduled.
@@ -32,8 +48,8 @@ public class Center extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error = RobotContainer.ADIS_IMU.getAngle();
-    RobotContainer.myRobot.arcadeDrive(0, subsysIMU.kP * error);
+    error = angle - RobotContainer.ADIS_IMU.getAngle();
+    RobotContainer.myRobot.arcadeDrive(subsysIMU.kP * error / 180, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -43,7 +59,7 @@ public class Center extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (error <= 4 && error >= -4) {
+    if (Math.abs(error) <= 2) {
       return true;
     } else {
       return false;
