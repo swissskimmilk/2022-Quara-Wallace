@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
 public class LeftTurn extends CommandBase {
   public Drivetrain drivetrain;
-  public IMU ADIS_IMU;
+  public IMU subsysIMU;
   public double angle;
   public double error;
   
@@ -35,12 +35,12 @@ public class LeftTurn extends CommandBase {
   @Override
   public void execute() {
     if (angle >= 270) {
-      error = abs(360 - angle) + RobotContainer.ADIS_IMU.getAngle();
+      error = abs(360 - RobotContainer.ADIS_IMU.getAngle()) + angle;
     } else {
       error = (angle - RobotContainer.ADIS_IMU.getAngle());
     }
-    // i think right is not inverted so negative is positive is negative
-    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 360, 0);
+    // i think right is not inverted so negative is positive is negative, 180 is just to damp the speed
+    RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 180, 0);
   }
 
   // Called once the command ends or is interrupted.
