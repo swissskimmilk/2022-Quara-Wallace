@@ -14,14 +14,11 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import java.lang.Math;
 
 public class RightTurn extends CommandBase {
-  // the angle we want
-  double angle;
- 
-  // distance left to turn
-  double error;
+  private double newAngle;
+  private double error;
 
-  public Drivetrain drivetrain;
-  public IMU subsysIMU;
+  private Drivetrain drivetrain;
+  private IMU subsysIMU;
 
   public RightTurn(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
@@ -29,9 +26,10 @@ public class RightTurn extends CommandBase {
     addRequirements(drivetrain, subsysIMU);
     // limit angle from 0 to 360, must convert 
     if (RobotContainer.ADIS_IMU.getAngle() < 90) {
-      angle = 360 - RobotContainer.ADIS_IMU.getAngle() - 90;
-    } else {
-      angle = RobotContainer.ADIS_IMU.getAngle() - 90;
+      newAngle = 360 - RobotContainer.ADIS_IMU.getAngle() - 90;
+    }
+    else {
+      newAngle = RobotContainer.ADIS_IMU.getAngle() - 90;
     }
   }
 
@@ -44,9 +42,9 @@ public class RightTurn extends CommandBase {
   @Override
   public void execute() {
     if (RobotContainer.ADIS_IMU.getAngle() < 90) {
-      error = 360 - RobotContainer.ADIS_IMU.getAngle() + angle;
+      error = 360 - RobotContainer.ADIS_IMU.getAngle() + newAngle;
     } else {
-      error = angle - RobotContainer.ADIS_IMU.getAngle();
+      error = newAngle - RobotContainer.ADIS_IMU.getAngle();
     }
     RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 180, 0);
   }

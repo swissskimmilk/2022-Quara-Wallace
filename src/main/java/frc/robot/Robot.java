@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
     RobotContainer.drivetrain.initDefaultCommand(RobotContainer.move);
     RobotContainer.leftTurn = new LeftTurn(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.rightTurn = new RightTurn(RobotContainer.drivetrain, RobotContainer.IMU);
-    RobotContainer.center = new Center(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.center = new SnapCenter(RobotContainer.drivetrain, RobotContainer.IMU);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
