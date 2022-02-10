@@ -16,9 +16,9 @@ public final class Constants {
     public static final int joystick = 0;
 
     // joystick button ids
-    public static final int leftTurnButton = XboxController.Button.kLeftBumper; // 5
-    public static final int rightTurnButton = XboxController.Button.kRightBumper; // 6
-    public static final int centerButton = XboxController.Button.kLeftstick; // 9
+    public static final int leftTurnButton = 5; // XboxController.Button.kLeftBumper; // 5
+    public static final int rightTurnButton = 6; // XboxController.Button.kRightBumper; // 6
+    public static final int centerButton = 9; // XboxController.Button.kLeftstick; // 9
 
     // The id for the XboxController
     public static final int xboxController = 1;

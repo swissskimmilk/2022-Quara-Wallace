@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -50,13 +51,15 @@ public class Robot extends TimedRobot {
     RobotContainer.IMU = new IMU();
     
     // the actual imu 
-    ADIS16470_IMU RobotContainter.ADIS_IMU = new ADIS16470_IMU();
+    RobotContainer.ADIS_IMU = new ADIS16470_IMU();
 
     // Create move system 
     RobotContainer.drivetrain = new Drivetrain();
     RobotContainer.move = new Move(RobotContainer.drivetrain);
     RobotContainer.drivetrain.initDefaultCommand(RobotContainer.move);
-    RobotContainer.turn = new Turn(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.leftTurn = new LeftTurn(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.rightTurn = new RightTurn(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.center = new Center(RobotContainer.drivetrain, RobotContainer.IMU);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);

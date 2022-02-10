@@ -35,7 +35,7 @@ public class Center extends CommandBase {
       angle = 90.0;
     } else if (initAngle > 135 || initAngle <= 225) {
       angle = 180.0;
-    } else if (initAngle > 225 || initANgle < 315){
+    } else if (initAngle > 225 || initAngle < 315){
       angle = 270.0;
     }
   }

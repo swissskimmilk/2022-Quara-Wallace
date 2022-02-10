@@ -8,7 +8,7 @@ public class IMU extends SubsystemBase {
   ADIS16470_IMU myIMU;
   
   // The gain for a simple P loop
-  double kP = 1;
+  public double kP = 1;
 
   public IMU() {
     myIMU = RobotContainer.ADIS_IMU;
