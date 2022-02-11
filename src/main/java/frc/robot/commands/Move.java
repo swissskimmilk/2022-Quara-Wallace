@@ -9,15 +9,18 @@ import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.DriveMode;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.IMU;
 
 public class Move extends CommandBase {
   private double spdMult = Constants.defSpdMult;
   private double rotMult = Constants.detRotMult;
   private DriveMode driveMode = Constants.defDriveMode;
-  public Drivetrain drivetrain;
+  private IMU subsysIMU;
+  private Drivetrain drivetrain;
 
-  public Move(Drivetrain mDrivetrain) {
+  public Move(Drivetrain mDrivetrain, IMU imu) {
     drivetrain = mDrivetrain;
+    subsysIMU = imu;
     addRequirements(mDrivetrain);
   }
 
@@ -29,6 +32,11 @@ public class Move extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // Don't move while calibrating is happening 
+    if (subsysIMU.calibrating) {
+      return;
+    }
+    
     // Switch speed by iterating over the map and checking if any of the buttons is pressed
     for (Map.Entry<Integer,Double> entry : Constants.speedMults.entrySet())
     {

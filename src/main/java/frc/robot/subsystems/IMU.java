@@ -5,7 +5,8 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
 public class IMU extends SubsystemBase {
-  ADIS16470_IMU myIMU;
+  private ADIS16470_IMU myIMU;
+  public boolean calibrating = false;
   
   // The gain for a simple P loop
   public double kP = 1;

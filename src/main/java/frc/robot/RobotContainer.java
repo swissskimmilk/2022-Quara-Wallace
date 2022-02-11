@@ -24,7 +24,9 @@ public class RobotContainer {
   // buttons for bindings
   public static JoystickButton xButtonLeftTurn;
   public static JoystickButton xButtonRightTurn;
-  public static JoystickButton xButtonCenter;
+  public static JoystickButton xButtonSnapRight;
+  public static JoystickButton xButtonSnapLeft;
+  public static JoystickButton xButtonCalibrate;
   
   // imu subsystem
   public static IMU IMU;
@@ -37,7 +39,9 @@ public class RobotContainer {
   public static Move move;
   public static LeftTurn leftTurn;
   public static RightTurn rightTurn;
-  public static SnapCenter center;
+  public static SnapRight snapRight;
+  public static SnapLeft snapLeft;
+  public static Calibrate calibrate;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
@@ -67,7 +71,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     xButtonLeftTurn.whenPressed(leftTurn);
     xButtonRightTurn.whenPressed(rightTurn);
-    xButtonCenter.whenPressed(center);
+    xButtonSnapRight.whenPressed(snapRight);
+    xButtonSnapLeft.whenPressed(snapLeft);
+    xButtonCalibrate.whenPressed(calibrate);
   }
 
   /**

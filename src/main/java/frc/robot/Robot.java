@@ -45,7 +45,9 @@ public class Robot extends TimedRobot {
     // buttons
     RobotContainer.xButtonLeftTurn = new JoystickButton(RobotContainer.xController, Constants.leftTurnButton);
     RobotContainer.xButtonRightTurn = new JoystickButton(RobotContainer.xController, Constants.rightTurnButton);
-    RobotContainer.xButtonCenter = new JoystickButton(RobotContainer.xController, Constants.centerButton);
+    RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.snapRightButton);
+    RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
+    RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
     
     // imu subsystem
     RobotContainer.IMU = new IMU();
@@ -55,11 +57,13 @@ public class Robot extends TimedRobot {
 
     // Create move system 
     RobotContainer.drivetrain = new Drivetrain();
-    RobotContainer.move = new Move(RobotContainer.drivetrain);
+    RobotContainer.move = new Move(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.drivetrain.initDefaultCommand(RobotContainer.move);
     RobotContainer.leftTurn = new LeftTurn(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.rightTurn = new RightTurn(RobotContainer.drivetrain, RobotContainer.IMU);
-    RobotContainer.center = new SnapCenter(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.snapRight = new SnapRight(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.snapLeft = new SnapLeft(RobotContainer.drivetrain, RobotContainer.IMU);
+    RobotContainer.calibrate = new Calibrate(RobotContainer.IMU);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);

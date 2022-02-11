@@ -6,14 +6,14 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 import java.lang.Math;
 
-public class SnapCenter extends CommandBase {
+public class SnapLeft extends CommandBase {
   private double error;
   private double initAngle;
   private double newAngle; 
   private IMU subsysIMU;
   private Drivetrain drivetrain;
 
-  public SnapCenter(Drivetrain mDrivetrain, IMU mIMU) {
+  public SnapLeft(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
     subsysIMU = mIMU;
     addRequirements(mDrivetrain, subsysIMU);
@@ -24,17 +24,17 @@ public class SnapCenter extends CommandBase {
   public void initialize() {
     initAngle = RobotContainer.ADIS_IMU.getAngle();
     // Find which angle (0, 90, 180, 270) robot is closest to
-    if (initAngle > 315 && initAngle <= 45) {
-      newAngle = 0.0;
+    if (initAngle > 0 && initAngle <= 90) {
+      newAngle = 0;
     } 
-    else if (initAngle > 45 && initAngle <= 135) {
-      newAngle = 90.0;
+    else if (initAngle > 90 && initAngle <= 180) {
+      newAngle = 90;
     } 
-    else if (initAngle > 135 && initAngle <= 225) {
-      newAngle = 180.0;
+    else if (initAngle > 180 && initAngle <= 270) {
+      newAngle = 180;
     } 
-    else if (initAngle > 225 && initAngle <= 315){
-      newAngle = 270.0;
+    else if (initAngle > 270 && initAngle < 360 || initAngle == 0){
+      newAngle = 270;
     }
   }
 
@@ -42,17 +42,7 @@ public class SnapCenter extends CommandBase {
   @Override
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    if (newAngle != 0) {
-      error = newAngle - currAngle;
-    }
-    else {
-      if (currAngle > 315) {
-        error = 360 - currAngle;
-      }
-      else if (currAngle <= 45) {
-        error = -currAngle;
-      }
-    }
+    error = IMU.addAngles(newAngle, -currAngle);
 
     // I dunno what this is supposed to do 
     // if (RobotContainer.ADIS_IMU.getAngle() >= 270) {
