@@ -36,7 +36,7 @@ public class LeftTurn extends CommandBase {
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
     // limit angle from 0 to 360, must convert 
-    if (currAngle < 90) {
+    if (newAngle > 270) {
       error = newAngle - currAngle - 360;
     } 
     else {

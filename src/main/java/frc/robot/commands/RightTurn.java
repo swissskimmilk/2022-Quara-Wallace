@@ -22,26 +22,14 @@ public class RightTurn extends CommandBase {
   @Override
   public void initialize() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    // limit angle from 0 to 360, must convert 
-    if (currAngle > 270 ) {
-      newAngle = currAngle + 90 - 360;
-    } 
-    else {
-      newAngle = currAngle + 90;
-    }
+    newAngle = IMU.addAngles(currAngle, 90);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    // limit angle from 0 to 360, must convert 
-    if (currAngle > 270) {
-      error = newAngle - currAngle + 360;
-    } 
-    else {
-      error = newAngle - currAngle;
-    }
+    error = IMU.addAngles(newAngle, -currAngle);
     RobotContainer.myRobot.arcadeDrive((subsysIMU.kP * error) / 180, 0);
   }
 
