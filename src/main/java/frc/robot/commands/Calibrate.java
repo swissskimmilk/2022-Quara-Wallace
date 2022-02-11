@@ -33,7 +33,6 @@ public class Calibrate extends CommandBase {
     public void execute() {
     }
     
-    
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {

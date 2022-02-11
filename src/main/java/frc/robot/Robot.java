@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonRightTurn = new JoystickButton(RobotContainer.xController, Constants.rightTurnButton);
     RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.snapRightButton);
     RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
-    RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
+    RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
     
     // imu subsystem
     RobotContainer.IMU = new IMU();
