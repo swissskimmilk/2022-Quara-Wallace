@@ -37,7 +37,7 @@ public class RobotContainer {
   public static Move move;
   public static LeftTurn leftTurn;
   public static RightTurn rightTurn;
-  public static Center center;
+  public static SnapCenter center;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
