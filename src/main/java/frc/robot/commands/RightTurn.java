@@ -6,6 +6,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 import java.lang.Math;
+import java.text.DecimalFormat;
 
 public class RightTurn extends CommandBase {
   private Drivetrain drivetrain;
@@ -22,8 +23,13 @@ public class RightTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    DecimalFormat angleFormat = new DecimalFormat("###.##");
+    
+    System.out.println("Turning Right");
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
+    System.out.println("Initial Angle:" + angleFormat.format(currAngle));
     newAngle = currAngle - 90;
+    System.out.println("Turning to: " + angleFormat.format(newAngle));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

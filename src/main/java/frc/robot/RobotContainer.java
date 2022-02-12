@@ -27,6 +27,7 @@ public class RobotContainer {
   public static JoystickButton xButtonSnapRight;
   public static JoystickButton xButtonSnapLeft;
   public static JoystickButton xButtonCalibrate;
+  public static JoystickButton xButtonResetAngle;
   
   // imu subsystem
   public static IMU IMU;
@@ -42,6 +43,7 @@ public class RobotContainer {
   public static SnapRight snapRight;
   public static SnapLeft snapLeft;
   public static Calibrate calibrate;
+  public static ResetAngle resetAngle;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
@@ -74,6 +76,7 @@ public class RobotContainer {
     xButtonSnapRight.whenPressed(snapRight);
     xButtonSnapLeft.whenPressed(snapLeft);
     xButtonCalibrate.whenPressed(calibrate);
+    xButtonResetAngle.whenPressed(resetAngle);
   }
 
   /**

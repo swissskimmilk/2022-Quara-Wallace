@@ -15,12 +15,22 @@ public final class Constants {
     // The id for the joystick 
     public static final int joystick = 0;
 
-    // joystick button ids
-    public static final int leftTurnButton = 5;
-    public static final int rightTurnButton = 6;
-    public static final int snapLeftButton = 9;
-    public static final int snapRightButton = 10; 
-    public static final int calibrateButton = 4;
+    // joystick button ids:
+
+        // left and right bumper
+        public static final int leftTurnButton = 5;
+        public static final int rightTurnButton = 6;
+
+        // left/right stick click to snap turn left and right
+        public static final int snapLeftButton = 9;
+        public static final int snapRightButton = 10;
+
+        // y button, to calibrate imu
+        public static final int calibrateButton = 4;
+
+        // x button, to reset/recalibrate imu angle
+        public static final int resetAngleButton = 3;
+
 
     // The id for the XboxController
     public static final int xboxController = 1;
@@ -51,6 +61,9 @@ public final class Constants {
     public static final double defSpdMult = -0.75;
     public static final double detRotMult = 0.6;
 
-    public static final double autoTurnMult = 1/90;
+    // automatic turning speed multiplier for 90 degree turns
+    public static final double autoTurnMult = 1 / 90;
+
+    // angle tolerance for automatic turns
     public static final double angleTolerance = 2;
 }

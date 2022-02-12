@@ -6,12 +6,13 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 import java.lang.Math;
+import java.text.DecimalFormat;
 
 public class LeftTurn extends CommandBase {
-  public Drivetrain drivetrain;
-  public IMU subsysIMU;
-  public double newAngle;
-  public double error;
+  private Drivetrain drivetrain;
+  private IMU subsysIMU;
+  private double newAngle;
+  private double error;
   
   public LeftTurn(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
@@ -22,10 +23,13 @@ public class LeftTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    DecimalFormat angleFormat = new DecimalFormat("###.##");
+
+    System.out.println("Turning Left");
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    // limit angle from 0 to 360, must convert 
+    System.out.println("Initial Angle: " + angleFormat.format(currAngle));
     newAngle = currAngle + 90;
-    System.out.println("newAngle: " + newAngle);
+    System.out.println("Turning to: " + angleFormat.format(newAngle));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

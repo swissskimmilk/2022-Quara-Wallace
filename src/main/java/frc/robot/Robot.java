@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.snapRightButton);
     RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
     RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
+    RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
     
     // imu subsystem
     RobotContainer.IMU = new IMU();
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
     RobotContainer.snapRight = new SnapRight(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.snapLeft = new SnapLeft(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.calibrate = new Calibrate(RobotContainer.IMU);
+    RobotContainer.resetAngle = new ResetAngle(RobotContainer.IMU);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
