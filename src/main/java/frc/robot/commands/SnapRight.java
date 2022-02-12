@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
@@ -22,7 +23,7 @@ public class SnapRight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    initAngle = RobotContainer.ADIS_IMU.getAngle();
+    initAngle = RobotContainer.ADIS_IMU.getAngle() % 360;
     // Find which angle (0, 90, 180, 270) robot is closest to
     if (initAngle >= 0 && initAngle < 90) {
       newAngle = 90;
@@ -42,16 +43,9 @@ public class SnapRight extends CommandBase {
   @Override
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    error = IMU.addAngles(newAngle, -currAngle);
+    error = newAngle - currAngle;
 
-    // I dunno what this is supposed to do 
-    // if (RobotContainer.ADIS_IMU.getAngle() >= 270) {
-    //   error = 360 - RobotContainer.ADIS_IMU.getAngle() + newAngle;
-    // } 
-    // else {
-    //   error = newAngle - RobotContainer.ADIS_IMU.getAngle();
-    // }
-    RobotContainer.myRobot.arcadeDrive(subsysIMU.kP * error / 180, 0);
+    RobotContainer.myRobot.arcadeDrive(Math.abs(subsysIMU.kP * error * Constants.autoTurnMult), 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -61,7 +55,7 @@ public class SnapRight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(error) <= 2) {
+    if (Math.abs(error) <= Constants.angleTolerance) {
       return true;
     } 
     else {

@@ -18,8 +18,8 @@ public final class Constants {
     // joystick button ids
     public static final int leftTurnButton = 5;
     public static final int rightTurnButton = 6;
-    public static final int snapLeftButton = 2;
-    public static final int snapRightButton = 3; 
+    public static final int snapLeftButton = 9;
+    public static final int snapRightButton = 10; 
     public static final int calibrateButton = 4;
 
     // The id for the XboxController
@@ -50,4 +50,7 @@ public final class Constants {
     
     public static final double defSpdMult = -0.75;
     public static final double detRotMult = 0.6;
+
+    public static final double autoTurnMult = 1/90;
+    public static final double angleTolerance = 2;
 }

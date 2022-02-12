@@ -26,15 +26,4 @@ public class IMU extends SubsystemBase {
   @Override
   public void periodic() {
   }
-
-  static public double addAngles(double ang1, double ang2) {
-    double newAng = ang1 + ang2;
-    if (newAng > 360) {
-      newAng -= 360;
-    }
-    else if (newAng < 0) {
-      newAng += 360;
-    }
-    return newAng;
-  }
 }
