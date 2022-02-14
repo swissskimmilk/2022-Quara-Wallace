@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     RobotContainer.rightTurn = new RightTurn(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.snapRight = new SnapRight(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.snapLeft = new SnapLeft(RobotContainer.drivetrain, RobotContainer.IMU);
-    RobotContainer.calibrate = new Calibrate(RobotContainer.IMU);
+    RobotContainer.calibrate = new Calibrate(RobotContainer.IMU, RobotContainer.drivetrain);
     RobotContainer.resetAngle = new ResetAngle(RobotContainer.IMU);
 
     // Create motor objects 

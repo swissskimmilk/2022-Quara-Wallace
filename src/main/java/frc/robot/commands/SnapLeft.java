@@ -33,13 +33,13 @@ public class SnapLeft extends CommandBase {
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
-    if (initAngle > 270) {
+    if (initAngle < 90 + Constants.angleTolerance && initAngle > Constants.angleTolerance) {
       newAngle = 0;
-    } else if (initAngle < 90) {
+    } else if (initAngle < 180 + Constants.angleTolerance && initAngle > Constants.angleTolerance) {
       newAngle = 90;
-    } else if (initAngle < 180) {
+    } else if (initAngle < 270 + Constants.angleTolerance && initAngle > Constants.angleTolerance) {
       newAngle = 180;
-    } else if (initAngle > 180) {
+    } else {
       newAngle = 270;
     }
     System.out.println("Turning to: " + angleFormat.format(newAngle));
@@ -58,7 +58,7 @@ public class SnapLeft extends CommandBase {
     error = newAngle - currAngle;
 
     // speed dependent on angle distance
-    RobotContainer.myRobot.arcadeDrive(-Math.abs(subsysIMU.kP * error * turnRate), 0);
+    RobotContainer.myRobot.arcadeDrive(-Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult), 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -69,7 +69,7 @@ public class SnapLeft extends CommandBase {
   @Override
   public boolean isFinished() {
     // end if the angle is approximately the desired one
-    if (Math.abs(error) <= Constants.angleTolerance) {
+    if (Math.abs(error) <= Constants.errorTolerance) {
       return true;
     } 
     else {

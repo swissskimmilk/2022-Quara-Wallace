@@ -2,15 +2,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
 
 public class Calibrate extends CommandBase {
     private IMU subsysIMU;
     private boolean finished = false;
 
-    public Calibrate(IMU mIMU) {
+    public Calibrate(IMU mIMU, Drivetrain mDriveTrain) {
         subsysIMU = mIMU;
-        addRequirements(subsysIMU);
+        addRequirements(subsysIMU, mDriveTrain);
     }
 
     // Called when the command is initially scheduled.

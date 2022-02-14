@@ -37,7 +37,7 @@ public class LeftTurn extends CommandBase {
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
     error = newAngle - currAngle;
-    RobotContainer.myRobot.arcadeDrive(-Math.abs(subsysIMU.kP * error) * Constants.autoTurnMult, 0);
+    RobotContainer.myRobot.arcadeDrive(-Math.abs(subsysIMU.kP * error * Constants.autoTurnMult), 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -47,7 +47,7 @@ public class LeftTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(error) <= Constants.angleTolerance) {
+    if (Math.abs(error) <= Constants.errorTolerance) {
       return true;
     } 
     else {
