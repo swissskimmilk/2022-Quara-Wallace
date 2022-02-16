@@ -26,4 +26,8 @@ public class IMU extends SubsystemBase {
   @Override
   public void periodic() {
   }
+
+  public double getAngle() {
+    return -myIMU.getAngle();
+  }
 }

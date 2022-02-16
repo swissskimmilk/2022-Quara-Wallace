@@ -29,12 +29,12 @@ public class SnapRight extends CommandBase {
     DecimalFormat angleFormat = new DecimalFormat("###.##");
 
     // angle bounded from 0 to 360 including negatives
-    initAngle = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
+    initAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
     if (initAngle > 270 - Constants.angleTolerance && initAngle < 360 - Constants.angleTolerance) {
-      newAngle = 0;
+      newAngle = 360;
     } else if (initAngle > 180 - Constants.angleTolerance && initAngle < 360 - Constants.angleTolerance) {
       newAngle = 270;
     } else if (initAngle > 90 - Constants.angleTolerance && initAngle < 360 - Constants.angleTolerance) {
@@ -52,10 +52,11 @@ public class SnapRight extends CommandBase {
   @Override
   public void execute() {
     // angle confined from 0 to 360 including negatives
-    double currAngle = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
+    double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
     // angle distance remaining 
     error = newAngle - currAngle;
+    System.out.println(RobotContainer.ADIS_IMU.getAngle() + " | " + subsysIMU.getAngle() + " | " + currAngle + " | " + error + " | " + turnRate + " | " + Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult) + " | " + newAngle);
 
     // speed dependent on angle distance
     RobotContainer.myRobot.arcadeDrive(Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult), 0);

@@ -50,11 +50,11 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
     RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
     
-    // imu subsystem
-    RobotContainer.IMU = new IMU();
-    
     // the actual imu 
     RobotContainer.ADIS_IMU = new ADIS16470_IMU();
+
+    // imu subsystem
+    RobotContainer.IMU = new IMU();
 
     // Create move system 
     RobotContainer.drivetrain = new Drivetrain();

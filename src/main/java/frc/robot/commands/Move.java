@@ -75,6 +75,7 @@ public class Move extends CommandBase {
       double rotation = RobotContainer.xController.getLeftX();
       // shouldn't this be switched? speed, then rotation
       RobotContainer.myRobot.arcadeDrive(rotation * rotMult, spdMult * speed);
+      //System.out.println(RobotContainer.ADIS_IMU.getAngle());    
       //System.out.println("leftX: " + RobotContainer.xController.getLeftX() + " | leftY: " + RobotContainer.xController.getLeftY() + " | rightX: " + RobotContainer.xController.getRightX() + " | " + RobotContainer.xController.getRightY());
     }
     else if (driveMode == DriveMode.tankDrive) {
