@@ -62,6 +62,9 @@ public final class Constants {
     public static final double detRotMult = 0.6;
 
     public static final double snapTurnMult = 1;
+    public static final double PMult = 0.1;
+    public static final double IMult = 0.1;
+    public static final double DMult = 0.1;
 
     // automatic turning speed multiplier for 90 degree turns
     public static final double autoTurnMult = 0.0111111111111111;

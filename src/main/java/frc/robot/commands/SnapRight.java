@@ -10,8 +10,12 @@ import java.text.DecimalFormat;
 
 public class SnapRight extends CommandBase {
   private double error;
+
   private double initAngle;
   private double newAngle; 
+  private double lastAngle;
+  private double integralSum;
+
   private IMU subsysIMU;
   private Drivetrain drivetrain;
   private double turnRate;
@@ -46,6 +50,7 @@ public class SnapRight extends CommandBase {
 
     // multiply the speed by this to make it range from 1 to 0 (ish) 
     turnRate = 1 / (newAngle - initAngle);
+    lastAngle = subsysIMU.getAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,12 +59,19 @@ public class SnapRight extends CommandBase {
     // angle confined from 0 to 360 including negatives
     double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
-    // angle distance remaining 
+    // PID vars
     error = newAngle - currAngle;
-    System.out.println(RobotContainer.ADIS_IMU.getAngle() + " | " + subsysIMU.getAngle() + " | " + currAngle + " | " + error + " | " + turnRate + " | " + Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult) + " | " + newAngle);
+    integralSum += error * 0.02;
+    double derivative = (lastAngle - currAngle) / 0.02;
 
+    // PID calculation 
+    double movement = Constants.PMult * error + Constants.IMult * integralSum + Constants.DMult * derivative;
+
+    System.out.println("Err: " + error + " I: " + integralSum + " D: " + derivative + " Mvmt: " + movement);
     // speed dependent on angle distance
-    RobotContainer.myRobot.arcadeDrive(Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult), 0);
+    RobotContainer.myRobot.arcadeDrive(movement, 0);
+
+    lastAngle = currAngle;
   }
 
   // Called once the command ends or is interrupted.
