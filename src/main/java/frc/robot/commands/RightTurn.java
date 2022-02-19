@@ -30,6 +30,8 @@ public class RightTurn extends CommandBase {
     System.out.println("Initial Angle:" + angleFormat.format(currAngle));
     newAngle = currAngle - 90;
     System.out.println("Turning to: " + angleFormat.format(newAngle));
+    System.out.println();
+  
   }
 
   // Called every time the scheduler runs while the command is scheduled.

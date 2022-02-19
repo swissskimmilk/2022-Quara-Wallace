@@ -18,8 +18,8 @@ public final class Constants {
     // joystick button ids:
 
         // left and right bumper
-        public static final int leftTurnButton = 5;
-        public static final int rightTurnButton = 6;
+        public static final int leftTurnButton = 3;
+        public static final int rightTurnButton = 2;
 
         // left/right stick click to snap turn left and right
         public static final int snapLeftButton = 9;
@@ -28,8 +28,8 @@ public final class Constants {
         // y button, to calibrate imu
         public static final int calibrateButton = 4;
 
-        // x button, to reset/recalibrate imu angle
-        public static final int resetAngleButton = 3;
+        // start button, to reset/recalibrate imu angle
+        public static final int resetAngleButton = 8;
 
 
     // The id for the XboxController
