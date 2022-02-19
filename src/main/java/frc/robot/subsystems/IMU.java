@@ -28,6 +28,6 @@ public class IMU extends SubsystemBase {
   }
 
   public double getAngle() {
-    return -myIMU.getAngle();
+    return myIMU.getAngle();
   }
 }

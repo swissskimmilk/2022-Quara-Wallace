@@ -37,16 +37,17 @@ public class SnapRight extends CommandBase {
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
-    if (initAngle > 270 - Constants.angleTolerance && initAngle < 360 - Constants.angleTolerance) {
-      newAngle = 360;
-    } else if (initAngle > 180 - Constants.angleTolerance && initAngle < 360 - Constants.angleTolerance) {
+    if (initAngle > 270) {
       newAngle = 270;
-    } else if (initAngle > 90 - Constants.angleTolerance && initAngle < 360 - Constants.angleTolerance) {
+    } else if (initAngle > 180) {
       newAngle = 180;
-    } else {
+    } else if (initAngle > 90) {
       newAngle = 90;
+    } else {
+      newAngle = 0;
     }
     System.out.println("Turning to: " + angleFormat.format(newAngle));
+    System.out.println();
 
     // multiply the speed by this to make it range from 1 to 0 (ish) 
     turnRate = 1 / (newAngle - initAngle);

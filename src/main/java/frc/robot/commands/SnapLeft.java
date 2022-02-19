@@ -33,16 +33,17 @@ public class SnapLeft extends CommandBase {
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
-    if (initAngle < 90 + Constants.angleTolerance && initAngle > Constants.angleTolerance) {
-      newAngle = 0;
-    } else if (initAngle < 180 + Constants.angleTolerance && initAngle > Constants.angleTolerance) {
+    if (initAngle < 90) {
       newAngle = 90;
-    } else if (initAngle < 270 + Constants.angleTolerance && initAngle > Constants.angleTolerance) {
+    } else if (initAngle < 180) {
       newAngle = 180;
-    } else {
+    } else if (initAngle < 270) {
       newAngle = 270;
+    } else {
+      newAngle = 0;
     }
     System.out.println("Turning to: " + angleFormat.format(newAngle));
+    System.out.println();
 
     // multiply the speed by this to make it range from 1 to 0 (ish) 
     turnRate = 1 / (newAngle - initAngle);
@@ -56,7 +57,7 @@ public class SnapLeft extends CommandBase {
 
     // angle distance remaining 
     error = newAngle - currAngle;
-    System.out.println(RobotContainer.ADIS_IMU.getAngle() + " | " + subsysIMU.getAngle() + " | " + currAngle + " | " + error + " | " + turnRate + " | " + Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult) + " | " + newAngle);
+    // System.out.println(RobotContainer.ADIS_IMU.getAngle() + " | " + subsysIMU.getAngle() + " | " + currAngle + " | " + error + " | " + turnRate + " | " + Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult) + " | " + newAngle);
 
     // speed dependent on angle distance
     RobotContainer.myRobot.arcadeDrive(-Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult), 0);
