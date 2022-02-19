@@ -40,7 +40,7 @@ public class SnapRight extends CommandBase {
     } else if (initAngle > 90) {
       newAngle = 90;
     } else {
-      newAngle = 0;
+      newAngle = 360;
     }
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
