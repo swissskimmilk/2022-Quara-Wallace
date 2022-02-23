@@ -13,11 +13,11 @@ public class SnapRight extends CommandBase {
 
   private double initAngle;
   private double newAngle; 
-  private double lastAngle;
 
   private IMU subsysIMU;
   private Drivetrain drivetrain;
   private PIDController pid;
+  private double angleTolerance;
 
   public SnapRight(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
@@ -31,15 +31,6 @@ public class SnapRight extends CommandBase {
     System.out.println("Snap Right");
     DecimalFormat angleFormat = new DecimalFormat("###.##");
     
-    // these be fucked
-    double kP = 0.02; 
-    double kD = 10;
-    double kI = 0;
-
-    pid = new PIDController(kP, kI, kD);
-    pid.setTolerance(Constants.angleTolerance);
-    pid.enableContinuousInput(0, 360);
-
     // angle bounded from 0 to 360 including negatives
     initAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
@@ -54,11 +45,22 @@ public class SnapRight extends CommandBase {
     } else {
       newAngle = 360;
     }
+
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
 
-    // multiply the speed by this to make it range from 1 to 0 (ish) 
-    lastAngle = subsysIMU.getAngle();
+    double error = Math.abs(newAngle - initAngle);
+
+    // pid constants
+    double kP = Math.abs(Constants.maxTurnPower / error);
+    double kD = 0;
+    double kI = kP / 200;
+
+    angleTolerance = 1.0 / error * 100.0;
+
+    pid = new PIDController(kP, kI, kD);
+    pid.setTolerance(angleTolerance);
+    // pid.enableContinuousInput(0, 360);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -67,11 +69,9 @@ public class SnapRight extends CommandBase {
     // angle confined from 0 to 360 including negatives
     double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
-    // speed dependent on angle distance\
-    System.out.println(pid.calculate(newAngle, currAngle));
-    RobotContainer.myRobot.arcadeDrive(pid.calculate(newAngle, currAngle), 0);
-
-    lastAngle = currAngle;
+    // speed dependent on angle distance
+    System.out.println(pid.calculate(currAngle, newAngle));
+    RobotContainer.myRobot.arcadeDrive(pid.calculate(currAngle, newAngle), 0);
   }
 
   // Called once the command ends or is interrupted.

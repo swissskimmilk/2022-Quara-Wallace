@@ -62,15 +62,19 @@ public final class Constants {
     public static final double detRotMult = 0.6;
 
     public static final double snapTurnMult = 1;
-    public static final double PMult = 0.1;
-    public static final double IMult = 0.1;
-    public static final double DMult = 0.1;
 
     // automatic turning speed multiplier for 90 degree turns
     public static final double autoTurnMult = 0.0111111111111111;
 
-    public static final double angleTolerance = 5;
+    // angle tolerance for auto 90 turns
+    public static final double errorTolerance = 1;
 
-    // angle tolerance for automatic turns
-    public static final double errorTolerance = 4;
+    // max turning power when auto turn, might need change since motors have exponential scale
+    public static final double maxTurnPower = 0.3;
+
+    // pid values for 90 degree turns (need adjust prob)
+    public static final double NINETY_kP = 0.003;
+    public static final double NINETY_kI = 0.00003;
+    public static final double NINETY_kD = 0;
+
 }

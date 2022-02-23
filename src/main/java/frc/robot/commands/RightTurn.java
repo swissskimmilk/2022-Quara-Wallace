@@ -1,18 +1,18 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IMU;
-import java.lang.Math;
 import java.text.DecimalFormat;
 
 public class RightTurn extends CommandBase {
   private Drivetrain drivetrain;
   private IMU subsysIMU;
   private double newAngle;
-  private double error;
+  private PIDController pid;
 
   public RightTurn(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
@@ -31,15 +31,17 @@ public class RightTurn extends CommandBase {
     newAngle = currAngle - 90;
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
-  
+
+    pid = new PIDController(Constants.NINETY_kP, Constants.NINETY_kI, Constants.NINETY_kD);
+    pid.setTolerance(Constants.errorTolerance);
+    // pid.enableContinuousInput(0, 360);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    error = newAngle - currAngle;
-    RobotContainer.myRobot.arcadeDrive(Math.abs(subsysIMU.kP * error * Constants.autoTurnMult), 0);
+    RobotContainer.myRobot.arcadeDrive(pid.calculate(currAngle, newAngle), 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -49,7 +51,7 @@ public class RightTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(error) <= Constants.errorTolerance) {
+    if (pid.atSetpoint()) {
       return true;
     } 
     else {

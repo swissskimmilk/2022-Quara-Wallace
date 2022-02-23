@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -9,12 +10,12 @@ import java.lang.Math;
 import java.text.DecimalFormat;
 
 public class SnapLeft extends CommandBase {
-  private double error;
   private double initAngle;
   private double newAngle; 
   private IMU subsysIMU;
   private Drivetrain drivetrain;
-  private double turnRate;
+  private PIDController pid;
+  private double angleTolerance;
 
   public SnapLeft(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
@@ -45,8 +46,18 @@ public class SnapLeft extends CommandBase {
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
 
-    // multiply the speed by this to make it range from 1 to 0 (ish) 
-    turnRate = 1 / (newAngle - initAngle);
+    double error = Math.abs(newAngle - initAngle);
+
+    // pid constants
+    double kP = Math.abs(Constants.maxTurnPower / error);
+    double kD = 0;
+    double kI = kP / 200;
+
+    pid = new PIDController(kP, kI, kD);
+
+    angleTolerance = 1.0 / error * 100.0;
+    pid.setTolerance(angleTolerance);
+    // pid.enableContinuousInput(0, 360);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,12 +66,8 @@ public class SnapLeft extends CommandBase {
     // angle confined from 0 to 360 including negatives
     double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
-    // angle distance remaining 
-    error = newAngle - currAngle;
-    // System.out.println(RobotContainer.ADIS_IMU.getAngle() + " | " + subsysIMU.getAngle() + " | " + currAngle + " | " + error + " | " + turnRate + " | " + Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult) + " | " + newAngle);
-
     // speed dependent on angle distance
-    RobotContainer.myRobot.arcadeDrive(-Math.abs(subsysIMU.kP * error * turnRate * Constants.snapTurnMult), 0);
+    RobotContainer.myRobot.arcadeDrive(pid.calculate(currAngle, newAngle), 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -71,7 +78,7 @@ public class SnapLeft extends CommandBase {
   @Override
   public boolean isFinished() {
     // end if the angle is approximately the desired one
-    if (Math.abs(error) <= Constants.errorTolerance) {
+    if (pid.atSetpoint()) {
       return true;
     } 
     else {
