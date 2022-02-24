@@ -19,7 +19,6 @@ public class IMU extends SubsystemBase {
   }
   
   public void initialize() {
-
   }
 
   // This method will be called once per scheduler run

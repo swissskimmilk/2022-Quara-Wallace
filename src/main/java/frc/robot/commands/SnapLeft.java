@@ -35,13 +35,13 @@ public class SnapLeft extends CommandBase {
 
     // Find which angle (0, 90, 180, 270) robot is closest to
     if (initAngle < 90) {
-      newAngle = 0;
-    } else if (initAngle < 180) {
       newAngle = 90;
-    } else if (initAngle < 270) {
+    } else if (initAngle < 180) {
       newAngle = 180;
-    } else {
+    } else if (initAngle < 270) {
       newAngle = 270;
+    } else {
+      newAngle = 360;
     }
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();

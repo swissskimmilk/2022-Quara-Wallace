@@ -58,19 +58,28 @@ public final class Constants {
         rotMults.put(11, 0.7);
     }
     
+    // default movement mults 
     public static final double defSpdMult = -0.75;
     public static final double detRotMult = 0.6;
-
-    public static final double snapTurnMult = 1;
 
     // automatic turning speed multiplier for 90 degree turns
     public static final double autoTurnMult = 0.0111111111111111;
 
     // angle tolerance for auto 90 turns
-    public static final double errorTolerance = 1;
+    public static final double errorTolerance = 2;
+
+    // for snap turning, determines whether 265 should snap to 270 or 360 etc
+    public static final double angleTolerance = 10;
 
     // max turning power when auto turn, might need change since motors have exponential scale
     public static final double maxTurnPower = 1;
+
+    // max velocity that the robot can be moving when it stops 
+    public static final double maxVelocity = 50;
+
+    // max/min speed while snap turning 
+    public static final double snapMaxSpeed = 0.5;
+    public static final double snapMinSpeed = 0.15;
 
     // pid values for 90 degree turns (need adjust prob)
     public static final double NINETY_kP = 0.003;

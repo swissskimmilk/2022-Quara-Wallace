@@ -17,7 +17,6 @@ public class SnapRight extends CommandBase {
   private IMU subsysIMU;
   private Drivetrain drivetrain;
   private PIDController pid;
-  private double angleTolerance;
 
   public SnapRight(Drivetrain mDrivetrain, IMU mIMU) {
     drivetrain = mDrivetrain;
@@ -32,19 +31,30 @@ public class SnapRight extends CommandBase {
     DecimalFormat angleFormat = new DecimalFormat("###.##");
     
     // angle bounded from 0 to 360 including negatives
-    double initAngle = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
+    double initAngleRemainder = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
+
+    // the angle straight from the imu 
     exactInitAngle = RobotContainer.ADIS_IMU.getAngle();
-    System.out.println("Initial Angle: " + angleFormat.format(initAngle));
+
+    System.out.println("Initial Angle: " + angleFormat.format(initAngleRemainder));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
-    if (initAngle > 270) {
-      newAngle = exactInitAngle - (initAngle - 270);
-    } else if (initAngle > 180) {
-      newAngle = exactInitAngle - (initAngle - 180);
-    } else if (initAngle > 90) {
-      newAngle = exactInitAngle - (initAngle - 90);
-    } else {
-      newAngle = exactInitAngle - (initAngle);
+    // uses angleTolerance to create some leeway 
+    // looks weird being for the imu, turning right is negative 
+    if (initAngleRemainder > 270 + Constants.angleTolerance || initAngleRemainder < Constants.angleTolerance) {
+      newAngle = exactInitAngle - (initAngleRemainder - 270);
+    } 
+    else if (initAngleRemainder < Constants.angleTolerance) {
+      newAngle = exactInitAngle - (90 + initAngleRemainder);
+    }
+    else if (initAngleRemainder > 180 + Constants.angleTolerance) {
+      newAngle = exactInitAngle - (initAngleRemainder - 180);
+    } 
+    else if (initAngleRemainder > 90 + Constants.angleTolerance) {
+      newAngle = exactInitAngle - (initAngleRemainder - 90);
+    } 
+    else {
+      newAngle = exactInitAngle - (initAngleRemainder);
     }
 
     System.out.println("Turning to: " + angleFormat.format(newAngle));
@@ -54,15 +64,11 @@ public class SnapRight extends CommandBase {
 
     // pid constants
     double kP = Math.abs(Constants.maxTurnPower / error);
-    //double kP = 0.005;
-    double kD = 0;
-    double kI = kP / 200;
-
-    //angleTolerance = 1.0 / error * 100.0;
-    angleTolerance = 2;
+    double kD = 0.000001;
+    double kI = kP / 50;
 
     pid = new PIDController(kP, kI, kD);
-    pid.setTolerance(angleTolerance);
+    pid.setTolerance(Constants.errorTolerance);
     // pid.enableContinuousInput(0, 360);
   }
 
@@ -76,7 +82,23 @@ public class SnapRight extends CommandBase {
     
     // speed dependent on angle distance
     double movement = pid.calculate(currAngle, newAngle);
+
+    // add bounds on the speed to prevent it from going too fast or slow 
+    if (Math.abs(movement) < Constants.snapMinSpeed && movement < 0) {
+      movement = -Constants.snapMinSpeed;
+    }
+    else if (Math.abs(movement) < Constants.snapMinSpeed) {
+      movement = Constants.snapMinSpeed;
+    }
+    else if (Math.abs(movement) > Constants.snapMaxSpeed && movement < 0) {
+      movement = -Constants.snapMaxSpeed;
+    }
+    else if (Math.abs(movement) > Constants.snapMaxSpeed) {
+      movement = Constants.snapMaxSpeed;
+    }
+
     System.out.println("NewAng: " + newAngle + " | " + "Curr: " + currAngle + " | " + "Movement: " + movement);
+    // needs to be negative because of the IMU 
     RobotContainer.myRobot.arcadeDrive(-movement, 0, false);
   }
 
@@ -87,8 +109,8 @@ public class SnapRight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // end if the angle is approximately the desired one
-    if (pid.atSetpoint()) {
+    // end if the angle is approximately the desired one and velocity is low enough 
+    if (pid.atSetpoint() && Math.abs(RobotContainer.ADIS_IMU.getRate()) < Constants.maxVelocity) {
       return true;
     } 
     else {
