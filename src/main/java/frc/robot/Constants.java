@@ -70,7 +70,7 @@ public final class Constants {
     public static final double errorTolerance = 1;
 
     // max turning power when auto turn, might need change since motors have exponential scale
-    public static final double maxTurnPower = 0.3;
+    public static final double maxTurnPower = 1;
 
     // pid values for 90 degree turns (need adjust prob)
     public static final double NINETY_kP = 0.003;
