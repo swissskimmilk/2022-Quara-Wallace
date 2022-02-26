@@ -81,10 +81,13 @@ public final class Constants {
     public static final double snapMaxSpeed = 0.5;
     public static final double snapMinSpeed = 0.15;
 
+    // min and max speed for robot to turn/move
     public static final double minSpeed = 0.35;
-    // pid values for 90 degree turns (need adjust prob)
+    public static final double maxSpeed = 0.5;
+
+    // pid values for 90 degree turns
     public static final double NINETY_kP = 0.01;
-    public static final double NINETY_kI = 0.0;
+    public static final double NINETY_kI = 0.001;
     public static final double NINETY_kD = 0;
 
 }

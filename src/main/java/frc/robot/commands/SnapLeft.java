@@ -49,15 +49,15 @@ public class SnapLeft extends CommandBase {
     double error = Math.abs(newAngle - initAngle);
 
     // pid constants
-    double kP = Math.abs(Constants.maxTurnPower / error);
+    double kP = Math.abs(Constants.maxSpeed / error) * 0.7;
     double kD = 0;
-    double kI = kP / 200;
+    double kI = 0;
 
     pid = new PIDController(kP, kI, kD);
 
     angleTolerance = 1.0 / error * 100.0;
     pid.setTolerance(angleTolerance);
-    // pid.enableContinuousInput(0, 360);
+    pid.enableContinuousInput(0, 360);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -67,7 +67,7 @@ public class SnapLeft extends CommandBase {
     double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
     // speed dependent on angle distance
-    RobotContainer.myRobot.arcadeDrive(pid.calculate(currAngle, newAngle), 0);
+    RobotContainer.myRobot.arcadeDrive(-Math.max(pid.calculate(currAngle, newAngle), Constants.minSpeed), 0);
   }
 
   // Called once the command ends or is interrupted.

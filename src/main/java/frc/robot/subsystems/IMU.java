@@ -8,9 +8,6 @@ public class IMU extends SubsystemBase {
   private ADIS16470_IMU myIMU;
   public boolean calibrating = false;
   
-  // The gain for a simple P loop
-  public double kP = 1;
-
   // Set what the 0 angle should be, since it varies at startup 
   public double startAngle = 0;
 

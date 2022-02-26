@@ -42,7 +42,6 @@ public class LeftTurn extends CommandBase {
   @Override
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    System.out.println(-pid.calculate(currAngle, newAngle));
     RobotContainer.myRobot.arcadeDrive(-Math.max(pid.calculate(currAngle, newAngle), Constants.minSpeed), 0);
   }
 
