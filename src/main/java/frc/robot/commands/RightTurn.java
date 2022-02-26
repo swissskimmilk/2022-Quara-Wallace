@@ -41,7 +41,8 @@ public class RightTurn extends CommandBase {
   @Override
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    RobotContainer.myRobot.arcadeDrive(pid.calculate(currAngle, newAngle), 0);
+    RobotContainer.myRobot.arcadeDrive(
+      Math.max(-pid.calculate(currAngle, newAngle), Constants.minSpeed), 0);
   }
 
   // Called once the command ends or is interrupted.
