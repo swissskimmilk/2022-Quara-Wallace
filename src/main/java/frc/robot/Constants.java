@@ -69,21 +69,20 @@ public final class Constants {
     public static final double errorTolerance = 1;
 
     // for snap turning, determines whether 265 should snap to 270 or 360 etc
-    public static final double angleTolerance = 10;
+    public static final double angleTolerance = 5;
 
     // max turning power when auto turn, might need change since motors have exponential scale
     public static final double maxTurnPower = 1;
 
     // max velocity that the robot can be moving when it stops 
-    public static final double maxVelocity = 50;
+    public static final double speedTolerance = 50;
 
     // max/min speed while snap turning 
     public static final double snapMaxSpeed = 0.5;
     public static final double snapMinSpeed = 0.15;
 
-    // min and max speed for robot to turn/move
-    public static final double minSpeed = 0.35;
-    public static final double maxSpeed = 0.5;
+    // min ninety turn speed (exp input)
+    public static final double minNinetySpeed = 0.35;
 
     // pid values for 90 degree turns
     public static final double NINETY_kP = 0.01;

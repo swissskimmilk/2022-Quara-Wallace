@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -11,7 +12,6 @@ import java.text.DecimalFormat;
 
 public class SnapRight extends CommandBase {
 
-  private double exactInitAngle;
   private double newAngle; 
 
   private IMU subsysIMU;
@@ -31,33 +31,29 @@ public class SnapRight extends CommandBase {
     DecimalFormat angleFormat = new DecimalFormat("###.##");
     
     // angle bounded from 0 to 360 including negatives
-    double initAngleRemainder = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
+    double initAngle = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
 
-    // the angle straight from the imu 
-    exactInitAngle = RobotContainer.ADIS_IMU.getAngle();
-
-    System.out.println("Initial Angle: " + angleFormat.format(initAngleRemainder));
+    System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
     // uses angleTolerance to create some leeway 
     // looks weird being for the imu, turning right is negative 
-    if (initAngleRemainder > 270) {
+    if (initAngle < Constants.angleTolerance) {
       newAngle = 270;
-    }
-    else if (initAngleRemainder > 180) {
-      newAngle = 180;
-    } 
-    else if (initAngleRemainder > 90) {
-      newAngle = 90;
-    } 
-    else {
+    } else if (initAngle < (90 + Constants.angleTolerance)) {
       newAngle = 0;
+    } else if (initAngle < (180 + Constants.angleTolerance)) {
+      newAngle = 90;
+    } else if (initAngle < (270 + Constants.angleTolerance)) {
+      newAngle = 180;
+    } else {
+      newAngle = 270;
     }
 
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
 
-    double error = Math.abs(newAngle - initAngleRemainder);
+    double error = Math.abs(newAngle - initAngle);
 
     // pid constants
     double kP = Math.abs(Constants.maxTurnPower / error);
@@ -65,7 +61,9 @@ public class SnapRight extends CommandBase {
     double kI = 0;
 
     pid = new PIDController(kP, kI, kD);
-    pid.setTolerance(Constants.errorTolerance);
+    pid.setTolerance(Constants.errorTolerance, Constants.speedTolerance);
+
+    // pid treats 0 and 360 as the same point for calculationss
     pid.enableContinuousInput(0, 360);
   }
 
@@ -81,18 +79,8 @@ public class SnapRight extends CommandBase {
     double movement = pid.calculate(currAngle, newAngle);
 
     // add bounds on the speed to prevent it from going too fast or slow 
-    if (Math.abs(movement) < Constants.snapMinSpeed && movement < 0) {
-      movement = -Constants.snapMinSpeed;
-    }
-    else if (Math.abs(movement) < Constants.snapMinSpeed) {
-      movement = Constants.snapMinSpeed;
-    }
-    else if (Math.abs(movement) > Constants.snapMaxSpeed && movement < 0) {
-      movement = -Constants.snapMaxSpeed;
-    }
-    else if (Math.abs(movement) > Constants.snapMaxSpeed) {
-      movement = Constants.snapMaxSpeed;
-    }
+    movement = Math.signum(movement) * 
+      MathUtil.clamp(Math.abs(movement), Constants.snapMinSpeed, Constants.snapMaxSpeed);
 
     // System.out.println("NewAng: " + newAngle + " | " + "Curr: " + currAngle + " | " + "Movement: " + movement);
     // needs to be negative because of the IMU 
@@ -107,7 +95,7 @@ public class SnapRight extends CommandBase {
   @Override
   public boolean isFinished() {
     // end if the angle is approximately the desired one and velocity is low enough 
-    if (pid.atSetpoint() && Math.abs(RobotContainer.ADIS_IMU.getRate()) < Constants.maxVelocity) {
+    if (pid.atSetpoint()) {
       return true;
     } 
     else {

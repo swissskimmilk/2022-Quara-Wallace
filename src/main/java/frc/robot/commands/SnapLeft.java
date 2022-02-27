@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -34,14 +35,16 @@ public class SnapLeft extends CommandBase {
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
-    if (initAngle < 90) {
+    if (initAngle > (360 - Constants.angleTolerance)) {
       newAngle = 90;
-    } else if (initAngle < 180) {
-      newAngle = 180;
-    } else if (initAngle < 270) {
-      newAngle = 270;
-    } else {
+    } else if (initAngle > (270 - Constants.angleTolerance)) {
       newAngle = 360;
+    } else if (initAngle > (180 - Constants.angleTolerance)) {
+      newAngle = 270;
+    } else if (initAngle > (90 - Constants.angleTolerance)) {
+      newAngle = 180;
+    } else {
+      newAngle = 90;
     }
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
@@ -49,14 +52,15 @@ public class SnapLeft extends CommandBase {
     double error = Math.abs(newAngle - initAngle);
 
     // pid constants
-    double kP = Math.abs(Constants.maxSpeed / error) * 0.7;
-    double kD = 0;
+    double kP = Math.abs(Constants.maxTurnPower / error);
+    double kD = 0.001;
     double kI = 0;
 
     pid = new PIDController(kP, kI, kD);
+    // angleTolerance = 1.0 / error * 100.0;
+    pid.setTolerance(Constants.errorTolerance, Constants.speedTolerance);
 
-    angleTolerance = 1.0 / error * 100.0;
-    pid.setTolerance(angleTolerance);
+    // pid treats 0 and 360 as the same point for calculationss
     pid.enableContinuousInput(0, 360);
   }
 
@@ -67,7 +71,14 @@ public class SnapLeft extends CommandBase {
     double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
     // speed dependent on angle distance
-    RobotContainer.myRobot.arcadeDrive(-Math.max(pid.calculate(currAngle, newAngle), Constants.minSpeed), 0);
+    double movement = pid.calculate(currAngle, newAngle);
+
+    // add bounds on the speed to prevent it from going too fast or slow 
+    movement = Math.signum(movement) * 
+      MathUtil.clamp(Math.abs(movement), Constants.snapMinSpeed, Constants.snapMaxSpeed);
+
+    // speed dependent on angle distance
+    RobotContainer.myRobot.arcadeDrive(-movement, 0, false);
   }
 
   // Called once the command ends or is interrupted.
