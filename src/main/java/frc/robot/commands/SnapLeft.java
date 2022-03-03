@@ -35,6 +35,7 @@ public class SnapLeft extends CommandBase {
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
     // Find which angle (0, 90, 180, 270) robot is closest to
+    /*
     if (initAngle > (360 - Constants.angleTolerance)) {
       newAngle = 90;
     } else if (initAngle > (270 - Constants.angleTolerance)) {
@@ -46,6 +47,18 @@ public class SnapLeft extends CommandBase {
     } else {
       newAngle = 90;
     }
+    */
+
+    if(nearestAngle(initAngle) - initAngle <= Constants.angleTolerance)
+    {
+      newAngle = nearestAngle(initAngle + Constants.angleTolerance + 1);
+    }
+    else{
+      newAngle = nearestAngle(initAngle);
+    }
+    System.out.println("Snap Left At" + initAngle + " Going to: " + newAngle);
+
+
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
 
@@ -62,6 +75,19 @@ public class SnapLeft extends CommandBase {
 
     // pid treats 0 and 360 as the same point for calculationss
     pid.enableContinuousInput(0, 360);
+  }
+
+  static double nearestAngle(double angle)
+  {
+    if(angle < 90)
+      return 90;
+    else if(angle < 180)
+      return 180;
+    else if(angle < 270)
+      return 270;
+    else
+      return 360;
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
