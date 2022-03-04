@@ -55,7 +55,7 @@ public class SnapRight extends CommandBase {
 
     if(initAngle - nearestAngle(initAngle) <= Constants.angleTolerance)
     {
-      newAngle = nearestAngle(initAngle + Constants.angleTolerance + 1);
+      newAngle = nearestAngle(angleInRange(initAngle - Constants.angleTolerance - 1));
     }
     else{
       newAngle = nearestAngle(initAngle);
@@ -73,11 +73,17 @@ public class SnapRight extends CommandBase {
     double kD = 0.001;
     double kI = 0;
 
-    pid = new PIDController(kP, kI, kD);
-    pid.setTolerance(Constants.errorTolerance, Constants.speedTolerance);
+    pid = new PIDController(Constants.NINETY_kP, Constants.NINETY_kI, Constants.NINETY_kD);
+    pid.setTolerance(Constants.errorTolerance);
 
     // pid treats 0 and 360 as the same point for calculationss
     pid.enableContinuousInput(0, 360);
+  }
+
+  // Makes any angle between 0 and 360
+  static double angleInRange(double angle)
+  {
+    return (angle % 360 + 360) % 360;
   }
 
   static double nearestAngle(double angle)
@@ -101,39 +107,11 @@ public class SnapRight extends CommandBase {
     return 0;
   }
 
-  /*
-  static boolean shouldStop(double angle)
-  {
-    HashMap<Integer, Integer> distancesToaAngles = new HashMap<>();
-    
-    if(Math.abs(360 - angle) <= Constants.angleTolerance)
-      return true;
-    else if(Math.abs(270 - angle) <= Constants.angleTolerance)
-      return true;double initAngle = (RobotContainer.ADIS_IMU.getAngle() % 360 + 360) % 360;
-    
-    
-    return false;
-  }
-  */
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // angle confined from 0 to 360 including negatives
-    double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
-
-    // double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    
-    // speed dependent on angle distance
-    double movement = pid.calculate(currAngle, newAngle);
-
-    // add bounds on the speed to prevent it from going too fast or slow 
-    movement = Math.signum(movement) * 
-      MathUtil.clamp(Math.abs(movement), Constants.snapMinSpeed, Constants.snapMaxSpeed);
-
-    // System.out.println("NewAng: " + newAngle + " | " + "Curr: " + currAngle + " | " + "Movement: " + movement);
-    // needs to be negative because of the IMU 
-    RobotContainer.myRobot.arcadeDrive(-movement, 0, false);
+    double currAngle = RobotContainer.ADIS_IMU.getAngle();
+    RobotContainer.myRobot.arcadeDrive(Math.max(-pid.calculate(currAngle, newAngle), Constants.minNinetySpeed), 0);
   }
 
   // Called once the command ends or is interrupted.
