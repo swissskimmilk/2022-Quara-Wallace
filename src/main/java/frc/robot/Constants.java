@@ -66,10 +66,10 @@ public final class Constants {
     public static final double autoTurnMult = 0.0111111111111111;
 
     // angle tolerance for auto 90 turns
-    public static final double errorTolerance = 2;
+    public static final double errorTolerance = 1;
 
     // for snap turning, determines whether 265 should snap to 270 or 360 etc
-    public static final double angleTolerance = 10;
+    public static final double angleTolerance = 5;
 
     // max turning power when auto turn, might need change since motors have exponential scale
     public static final double maxTurnPower = 1;
