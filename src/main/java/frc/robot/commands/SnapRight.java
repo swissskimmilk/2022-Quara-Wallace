@@ -51,6 +51,20 @@ public class SnapRight extends CommandBase {
     } else {
       newAngle = 270;
     }
+<<<<<<< HEAD
+=======
+    */
+
+    if(initAngle - nearestAngle(initAngle) <= Constants.angleTolerance)
+    {
+      newAngle = nearestAngle(angleInRange(initAngle - Constants.angleTolerance - 1));
+    }
+    else{
+      newAngle = nearestAngle(initAngle);
+    }
+
+    System.out.println("Snap Right At" + initAngle + " Going to: " + newAngle);
+>>>>>>> 64867216f28f35bbe210ff54ec6f1754860337b9
 
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
@@ -62,13 +76,14 @@ public class SnapRight extends CommandBase {
     double kD = 0.001;
     double kI = 0;
 
-    pid = new PIDController(kP, kI, kD);
-    pid.setTolerance(Constants.errorTolerance, Constants.speedTolerance);
+    pid = new PIDController(Constants.NINETY_kP, Constants.NINETY_kI, Constants.NINETY_kD);
+    pid.setTolerance(Constants.errorTolerance);
 
     // pid treats 0 and 360 as the same point for calculationss
     pid.enableContinuousInput(0, 360);
   }
 
+<<<<<<< HEAD
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
@@ -85,6 +100,40 @@ public class SnapRight extends CommandBase {
     // System.out.println("Movement: " + movement);
     // needs to be negative because of the IMU 
     RobotContainer.myRobot.arcadeDrive(-movement, 0, false);
+=======
+  // Makes any angle between 0 and 360
+  static double angleInRange(double angle)
+  {
+    return (angle % 360 + 360) % 360;
+  }
+
+  static double nearestAngle(double angle)
+  {
+    if(angle > 270)
+    {
+      return 270.0;
+    }
+    else if(angle > 180)
+    {
+      return 180.0;
+    }
+    else if(angle > 90)
+    {
+      return 90.0;
+    }
+    else if(angle > 0)
+    {
+      return 360.0;
+    }
+    return 0;
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    double currAngle = RobotContainer.ADIS_IMU.getAngle();
+    RobotContainer.myRobot.arcadeDrive(Math.max(-pid.calculate(currAngle, newAngle), Constants.minNinetySpeed), 0);
+>>>>>>> 64867216f28f35bbe210ff54ec6f1754860337b9
   }
 
   // Called once the command ends or is interrupted.
