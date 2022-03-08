@@ -56,7 +56,7 @@ public class SnapRight extends CommandBase {
     System.out.println();
 
     double error = Math.abs(newAngle - initAngle);
-
+    System.out.println(error);
     // pid constants
     double kP = Math.abs(Constants.maxTurnPower / error);
     double kD = 0.001;
@@ -75,8 +75,6 @@ public class SnapRight extends CommandBase {
     // angle confined from 0 to 360 including negatives
     double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
 
-    // double currAngle = RobotContainer.ADIS_IMU.getAngle();
-    
     // speed dependent on angle distance
     double movement = pid.calculate(currAngle, newAngle);
 
@@ -84,7 +82,7 @@ public class SnapRight extends CommandBase {
     movement = Math.signum(movement) * 
       MathUtil.clamp(Math.abs(movement), Constants.snapMinSpeed, Constants.snapMaxSpeed);
 
-    System.out.println("Movement: " + movement);
+    // System.out.println("Movement: " + movement);
     // needs to be negative because of the IMU 
     RobotContainer.myRobot.arcadeDrive(-movement, 0, false);
   }
