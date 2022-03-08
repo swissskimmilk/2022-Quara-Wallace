@@ -36,24 +36,6 @@ public class SnapRight extends CommandBase {
 
     System.out.println("Initial Angle: " + angleFormat.format(initAngle));
 
-    // Find which angle (0, 90, 180, 270) robot is closest to
-    // uses angleTolerance to create some leeway 
-    // looks weird being for the imu, turning right is negative
-
-    if (initAngle < Constants.angleTolerance) {
-      newAngle = 270;
-    } else if (initAngle < (90 + Constants.angleTolerance)) {
-      newAngle = 0;
-    } else if (initAngle < (180 + Constants.angleTolerance)) {
-      newAngle = 90;
-    } else if (initAngle < (270 + Constants.angleTolerance)) {
-      newAngle = 180;
-    } else {
-      newAngle = 270;
-    }
-<<<<<<< HEAD
-=======
-    */
 
     if(initAngle - nearestAngle(initAngle) <= Constants.angleTolerance)
     {
@@ -64,13 +46,12 @@ public class SnapRight extends CommandBase {
     }
 
     System.out.println("Snap Right At" + initAngle + " Going to: " + newAngle);
->>>>>>> 64867216f28f35bbe210ff54ec6f1754860337b9
 
     System.out.println("Turning to: " + angleFormat.format(newAngle));
     System.out.println();
 
     double error = Math.abs(newAngle - initAngle);
-    System.out.println(error);
+
     // pid constants
     double kP = Math.abs(Constants.maxTurnPower / error);
     double kD = 0.001;
@@ -83,24 +64,6 @@ public class SnapRight extends CommandBase {
     pid.enableContinuousInput(0, 360);
   }
 
-<<<<<<< HEAD
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    // angle confined from 0 to 360 including negatives
-    double currAngle = (subsysIMU.getAngle() % 360 + 360) % 360;
-
-    // speed dependent on angle distance
-    double movement = pid.calculate(currAngle, newAngle);
-
-    // add bounds on the speed to prevent it from going too fast or slow 
-    movement = Math.signum(movement) * 
-      MathUtil.clamp(Math.abs(movement), Constants.snapMinSpeed, Constants.snapMaxSpeed);
-
-    // System.out.println("Movement: " + movement);
-    // needs to be negative because of the IMU 
-    RobotContainer.myRobot.arcadeDrive(-movement, 0, false);
-=======
   // Makes any angle between 0 and 360
   static double angleInRange(double angle)
   {
@@ -133,7 +96,6 @@ public class SnapRight extends CommandBase {
   public void execute() {
     double currAngle = RobotContainer.ADIS_IMU.getAngle();
     RobotContainer.myRobot.arcadeDrive(Math.max(-pid.calculate(currAngle, newAngle), Constants.minNinetySpeed), 0);
->>>>>>> 64867216f28f35bbe210ff54ec6f1754860337b9
   }
 
   // Called once the command ends or is interrupted.
