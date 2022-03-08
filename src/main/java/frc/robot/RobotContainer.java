@@ -45,6 +45,10 @@ public class RobotContainer {
   public static Calibrate calibrate;
   public static ResetAngle resetAngle;
 
+  // intake 
+  public static Intake intake;
+  public static JoystickButton xButtonActuator;
+
   // The motors 
   public static WPI_VictorSPX rightLeader;
   public static WPI_VictorSPX rightFollower;
