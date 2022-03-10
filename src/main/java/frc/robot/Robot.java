@@ -50,7 +50,8 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
     RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
     RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
-    RobotContainer.jButtonActuator = new JoystickButton(RobotContainer.joystick, Constants.actuatorButton);
+    RobotContainer.jButtonContract = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
+    RobotContainer.jButtonExtend = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
 
     // the actual imu 
     RobotContainer.ADIS_IMU = new ADIS16470_IMU();
@@ -82,9 +83,14 @@ public class Robot extends TimedRobot {
 
     // Intake
     RobotContainer.mIntake = new Intake();
-    RobotContainer.actuate = new Actuator(RobotContainer.mIntake);
+    RobotContainer.contract = new Contract(RobotContainer.mIntake);
+    RobotContainer.extend = new Extend(RobotContainer.mIntake);
     RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
     RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
+    // numbers in order are max pwm in ms, deadband max, center off pulse width, deadband min, min pwm
+    RobotContainer.leftActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
+    RobotContainer.rightActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
+
     m_robotContainer = new RobotContainer();
   }
 

@@ -29,7 +29,8 @@ public class RobotContainer {
   public static JoystickButton xButtonSnapLeft;
   public static JoystickButton xButtonCalibrate;
   public static JoystickButton xButtonResetAngle;
-  public static JoystickButton jButtonActuator;
+  public static JoystickButton jButtonContract;
+  public static JoystickButton jButtonExtend;
 
   // imu subsystem
   public static IMU IMU;
@@ -49,7 +50,8 @@ public class RobotContainer {
 
   // intake 
   public static Intake mIntake;
-  public static Actuator actuate;
+  public static Extend extend;
+  public static Contract contract;
   public static Servo leftActuator;
   public static Servo rightActuator;
 
@@ -85,7 +87,8 @@ public class RobotContainer {
     xButtonSnapLeft.whenPressed(snapLeft);
     xButtonCalibrate.whenPressed(calibrate);
     xButtonResetAngle.whenPressed(resetAngle);
-    jButtonActuator.whenPressed(actuate);
+    jButtonContract.whenPressed(contract);
+    jButtonExtend.whenPressed(extend);
   }
 
   /**

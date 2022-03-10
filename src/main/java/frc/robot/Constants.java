@@ -31,8 +31,11 @@ public final class Constants {
         // start button, to reset/recalibrate imu angle
         public static final int resetAngleButton = 8;
 
-        // button to extend linear actuator. 5 button on the joystick
-        public static final int actuatorButton = 5;
+        // button to contract linear actuator. 5 button on the joystick
+        public static final int contractButton = 5;
+
+        // extend linear actuator, 6 on joystick
+        public static final int extendButton = 6;
 
 
     // The id for the XboxController
