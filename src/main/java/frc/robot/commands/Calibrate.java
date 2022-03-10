@@ -38,6 +38,7 @@ public class Calibrate extends CommandBase {
     @Override
     public boolean isFinished() {
         if (finished) {
+            System.out.println("finished");
             subsysIMU.calibrating = false;
             return true;
         }

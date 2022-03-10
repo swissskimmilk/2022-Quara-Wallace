@@ -31,8 +31,8 @@ public final class Constants {
         // start button, to reset/recalibrate imu angle
         public static final int resetAngleButton = 8;
 
-        // button to extend linear actuator. A button on the controller
-        public static final int actuatorButton = 1;
+        // button to extend linear actuator. 5 button on the joystick
+        public static final int actuatorButton = 5;
 
 
     // The id for the XboxController
@@ -69,10 +69,10 @@ public final class Constants {
     public static final double autoTurnMult = 0.01;
 
     // angle tolerance for auto 90 turns
-    public static final double errorTolerance = 1;
+    public static final double errorTolerance = 2;
 
     // for snap turning, determines whether 265 should snap to 270 or 360 etc
-    public static final double angleTolerance = 5;
+    public static final double angleTolerance = 10;
 
     // max turning power when auto turn, might need change since motors have exponential scale
     public static final double maxTurnPower = 1;
@@ -82,14 +82,18 @@ public final class Constants {
 
     // max/min speed while snap turning 
     public static final double snapMaxSpeed = 0.5;
-    public static final double snapMinSpeed = 0.15;
+    public static final double snapMinSpeed = 0.18;
 
     // min ninety turn speed (exp input)
     public static final double minNinetySpeed = 0.35;
 
     // pid values for 90 degree turns
     public static final double NINETY_kP = 0.01;
-    public static final double NINETY_kI = 0.001;
+    public static final double NINETY_kI = 0;
     public static final double NINETY_kD = 0;
+
+    // Actuator Ports
+    public static final int leftActuatorPort = 0;
+    public static final int rightActuatorPort = 1;
 
 }

@@ -6,6 +6,7 @@ import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -28,7 +29,8 @@ public class RobotContainer {
   public static JoystickButton xButtonSnapLeft;
   public static JoystickButton xButtonCalibrate;
   public static JoystickButton xButtonResetAngle;
-  
+  public static JoystickButton jButtonActuator;
+
   // imu subsystem
   public static IMU IMU;
 
@@ -46,8 +48,10 @@ public class RobotContainer {
   public static ResetAngle resetAngle;
 
   // intake 
-  public static Intake intake;
-  public static JoystickButton xButtonActuator;
+  public static Intake mIntake;
+  public static Actuator actuate;
+  public static Servo leftActuator;
+  public static Servo rightActuator;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
@@ -81,6 +85,7 @@ public class RobotContainer {
     xButtonSnapLeft.whenPressed(snapLeft);
     xButtonCalibrate.whenPressed(calibrate);
     xButtonResetAngle.whenPressed(resetAngle);
+    jButtonActuator.whenPressed(actuate);
   }
 
   /**

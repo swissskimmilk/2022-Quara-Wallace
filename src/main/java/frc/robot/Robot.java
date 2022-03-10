@@ -8,6 +8,7 @@ package frc.robot;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -49,7 +50,8 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
     RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
     RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
-    
+    RobotContainer.jButtonActuator = new JoystickButton(RobotContainer.joystick, Constants.actuatorButton);
+
     // the actual imu 
     RobotContainer.ADIS_IMU = new ADIS16470_IMU();
 
@@ -78,6 +80,11 @@ public class Robot extends TimedRobot {
     RobotContainer.leftGroup = new MotorControllerGroup(RobotContainer.leftLeader, RobotContainer.leftFollower);
     RobotContainer.myRobot = new DifferentialDrive(RobotContainer.leftGroup, RobotContainer.rightGroup);
 
+    // Intake
+    RobotContainer.mIntake = new Intake();
+    RobotContainer.actuate = new Actuator(RobotContainer.mIntake);
+    RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
+    RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
     m_robotContainer = new RobotContainer();
   }
 
