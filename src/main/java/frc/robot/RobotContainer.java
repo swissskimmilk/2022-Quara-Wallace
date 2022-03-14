@@ -32,6 +32,7 @@ public class RobotContainer {
   public static JoystickButton jButtonContract;
   public static JoystickButton jButtonExtend;
   public static JoystickButton jButtonShoot;
+  public static JoystickButton jButtonClimb; 
 
   // imu subsystem
   public static IMU IMU;
@@ -57,12 +58,16 @@ public class RobotContainer {
   public static Servo rightActuator;
   public static Shoot shoot;
 
+  // climb
+  public static ExtendClimb extendClimb; 
+
   // The motors 
   public static WPI_VictorSPX rightLeader;
   public static WPI_VictorSPX rightFollower;
   public static WPI_VictorSPX leftLeader;
   public static WPI_VictorSPX leftFollower;
   public static WPI_VictorSPX shooter;
+  public static WPI_VictorSPX climber;
 
 
 
@@ -96,6 +101,7 @@ public class RobotContainer {
     jButtonContract.whenPressed(contract);
     jButtonExtend.whenPressed(extend);
     jButtonShoot.toggleWhenActive(shoot);
+    jButtonClimb.whenPressed(extendClimb);
 
   }
 

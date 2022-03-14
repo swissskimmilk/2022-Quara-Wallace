@@ -40,6 +40,9 @@ public final class Constants {
         // Shoot button (spin wheels)
         public static final int shootButton = 3;
 
+        // climb button
+        public static final int climbButton = 4;
+
 
     // The id for the XboxController
     public static final int xboxController = 1;
@@ -107,6 +110,12 @@ public final class Constants {
 
     // Shooting speed
     public static final double shooterSpeed = 0.5;
+
+    // Climb port
+
+    public static final int climbPort = 3;
+
+
 
 
 }
