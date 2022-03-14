@@ -5,10 +5,10 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 
 public class Contract extends CommandBase {
-    //private Intake subSysIntake;
+    private Intake subSysIntake;
 
     public Contract(Intake intake){
-        //subSysIntake = intake;
+        subSysIntake = intake;
         addRequirements(intake);
     }
     
