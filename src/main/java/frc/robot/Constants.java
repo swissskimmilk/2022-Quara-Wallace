@@ -37,6 +37,9 @@ public final class Constants {
         // extend linear actuator, 6 on joystick
         public static final int extendButton = 6;
 
+        // Shoot button (spin wheels)
+        public static final int shootButton = 3;
+
 
     // The id for the XboxController
     public static final int xboxController = 1;
@@ -98,5 +101,12 @@ public final class Constants {
     // Actuator Ports
     public static final int leftActuatorPort = 0;
     public static final int rightActuatorPort = 1;
+
+    // Shoot ports
+    public static final int shootMotorPort = 2;
+
+    // Shooting speed
+    public static final double shooterSpeed = 0.5;
+
 
 }

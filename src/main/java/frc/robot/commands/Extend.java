@@ -5,11 +5,11 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 
 public class Extend extends CommandBase {
-    private Intake subSysIntake;
+    //private Intake subSysIntake;
     
     public Extend(Intake mIntake) {
         addRequirements(mIntake);
-        subSysIntake = mIntake;
+        //subSysIntake = mIntake;
     }
 
     @Override

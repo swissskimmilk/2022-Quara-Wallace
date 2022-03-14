@@ -31,6 +31,7 @@ public class RobotContainer {
   public static JoystickButton xButtonResetAngle;
   public static JoystickButton jButtonContract;
   public static JoystickButton jButtonExtend;
+  public static JoystickButton jButtonShoot;
 
   // imu subsystem
   public static IMU IMU;
@@ -54,12 +55,16 @@ public class RobotContainer {
   public static Contract contract;
   public static Servo leftActuator;
   public static Servo rightActuator;
+  public static Shoot shoot;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
   public static WPI_VictorSPX rightFollower;
   public static WPI_VictorSPX leftLeader;
   public static WPI_VictorSPX leftFollower;
+  public static WPI_VictorSPX shooter;
+
+
 
   // The groups for the motors 
   public static MotorControllerGroup rightGroup;
@@ -67,6 +72,7 @@ public class RobotContainer {
 
   // DifferentialDrive is what actually performs the movements 
   public static DifferentialDrive myRobot;
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -89,6 +95,8 @@ public class RobotContainer {
     xButtonResetAngle.whenPressed(resetAngle);
     jButtonContract.whenPressed(contract);
     jButtonExtend.whenPressed(extend);
+    jButtonShoot.toggleWhenActive(shoot);
+
   }
 
   /**
