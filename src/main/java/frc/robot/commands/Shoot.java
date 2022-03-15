@@ -27,7 +27,7 @@ public class Shoot extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        RobotContainer.shooter.stopMotor();
-        return true;
+        // command ends when toggled instead
+        return false;
     }
 }

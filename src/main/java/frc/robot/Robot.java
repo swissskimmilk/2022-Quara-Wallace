@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
     RobotContainer.jButtonContract = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
     RobotContainer.jButtonExtend = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
     RobotContainer.jButtonShoot = new JoystickButton(RobotContainer.joystick, Constants.shootButton);
-    RobotContainer.jButtonClimb = new JoystickButton(RobotContainer.joystick, Constants.climbButton)
+    RobotContainer.jButtonClimb = new JoystickButton(RobotContainer.joystick, Constants.climbButton);
 
     // the actual imu 
     RobotContainer.ADIS_IMU = new ADIS16470_IMU();

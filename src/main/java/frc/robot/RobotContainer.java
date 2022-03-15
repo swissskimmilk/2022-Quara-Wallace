@@ -69,8 +69,6 @@ public class RobotContainer {
   public static WPI_VictorSPX shooter;
   public static WPI_VictorSPX climber;
 
-
-
   // The groups for the motors 
   public static MotorControllerGroup rightGroup;
   public static MotorControllerGroup leftGroup;
@@ -100,9 +98,8 @@ public class RobotContainer {
     xButtonResetAngle.whenPressed(resetAngle);
     jButtonContract.whenPressed(contract);
     jButtonExtend.whenPressed(extend);
-    jButtonShoot.toggleWhenActive(shoot);
-    jButtonClimb.whenPressed(extendClimb);
-
+    jButtonShoot.toggleWhenActive(shoot.andThen(() -> RobotContainer.shooter.stopMotor()));
+    jButtonClimb.whenPressed(extendClimb.andThen(() -> RobotContainer.climber.stopMotor()));
   }
 
   /**
