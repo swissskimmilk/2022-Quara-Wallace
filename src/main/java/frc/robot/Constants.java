@@ -106,7 +106,9 @@ public final class Constants {
     public static final int rightActuatorPort = 1;
 
     // Shoot ports
-    public static final int shootMotorPort = 2;
+    public static final int frontShootMotorPort = 2;
+    public static final int backShooterMotorPort = 4;
+
 
     // Shooting speed
     public static final double shooterSpeed = 0.5;

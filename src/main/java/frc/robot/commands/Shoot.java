@@ -18,7 +18,9 @@ public class Shoot extends CommandBase{
 
     @Override
     public void initialize() {
-        RobotContainer.shooter.set(Constants.shooterSpeed);
+        RobotContainer.frontShooter.set(Constants.shooterSpeed);
+        RobotContainer.backShooter.set(Constants.shooterSpeed);
+
     }
 
     public void excecute() {

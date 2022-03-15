@@ -89,7 +89,8 @@ public class Robot extends TimedRobot {
     RobotContainer.extend = new Extend(RobotContainer.mIntake);
     RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
     RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
-    RobotContainer.shooter = new WPI_VictorSPX(Constants.shootMotorPort);
+    RobotContainer.frontShooter = new WPI_VictorSPX(Constants.frontShootMotorPort);
+    RobotContainer.backShooter = new WPI_VictorSPX(Constants.backShooterMotorPort)
 
     // Climb
     RobotContainer.climber = new WPI_VictorSPX(Constants.climbPort);
