@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
     RobotContainer.jButtonContract = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
     RobotContainer.jButtonExtend = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
     RobotContainer.jButtonShoot = new JoystickButton(RobotContainer.joystick, Constants.shootButton);
+    RobotContainer.jButtonStopShoot = new JoystickButton(RobotContainer.joystick, Constants.stopShootButton);
     RobotContainer.jButtonClimb = new JoystickButton(RobotContainer.joystick, Constants.climbButton);
 
     // the actual imu 
@@ -76,6 +77,7 @@ public class Robot extends TimedRobot {
     RobotContainer.resetAngle = new ResetAngle(RobotContainer.IMU);
     RobotContainer.mIntake = new Intake();
     RobotContainer.shoot = new Shoot(RobotContainer.mIntake);
+    RobotContainer.stopShoot = new StopShoot(RobotContainer.mIntake);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);

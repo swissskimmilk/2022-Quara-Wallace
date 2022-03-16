@@ -39,6 +39,7 @@ public final class Constants {
 
         // Shoot button (spin wheels)
         public static final int shootButton = 3;
+        public static final int stopShootButton = 2;
 
         // climb button
         public static final int climbButton = 4;
@@ -109,15 +110,9 @@ public final class Constants {
     public static final int frontShootMotorPort = 15;
     public static final int backShooterMotorPort = 2;
 
-
     // Shooting speed
     public static final double shooterSpeed = 0.5;
 
     // Climb port
-
     public static final int climbPort = 4;
-
-
-
-
 }

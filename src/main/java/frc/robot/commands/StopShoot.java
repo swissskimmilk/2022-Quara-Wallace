@@ -7,12 +7,12 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 
-public class Shoot extends CommandBase{
+public class StopShoot extends CommandBase{
     private Intake subSysIntake;
     private boolean shooting = false;
     private boolean finished = false;
 
-    public Shoot(Intake mIntake)
+    public StopShoot(Intake mIntake)
     {
         addRequirements(mIntake);
         subSysIntake = mIntake;
@@ -20,7 +20,7 @@ public class Shoot extends CommandBase{
 
     @Override
     public void initialize() {
-        RobotContainer.shooterGroup.set(Constants.shooterSpeed);
+        RobotContainer.shooterGroup.stopMotor();
     }
 
     @Override

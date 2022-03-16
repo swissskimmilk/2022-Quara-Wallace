@@ -32,6 +32,7 @@ public class RobotContainer {
   public static JoystickButton jButtonContract;
   public static JoystickButton jButtonExtend;
   public static JoystickButton jButtonShoot;
+  public static JoystickButton jButtonStopShoot;
   public static JoystickButton jButtonClimb; 
 
   // imu subsystem
@@ -57,6 +58,7 @@ public class RobotContainer {
   public static Servo leftActuator;
   public static Servo rightActuator;
   public static Shoot shoot;
+  public static StopShoot stopShoot;
 
   // climb
   public static ExtendClimb extendClimb; 
@@ -102,7 +104,8 @@ public class RobotContainer {
     xButtonResetAngle.whenPressed(resetAngle);
     jButtonContract.whenPressed(contract);
     jButtonExtend.whenPressed(extend);
-    jButtonShoot.toggleWhenPressed(shoot);
+    jButtonShoot.whenPressed(shoot);
+    jButtonStopShoot.whenPressed(stopShoot);
     //jButtonShoot.toggleWhenActive(shoot.andThen(() -> RobotContainer.backShooter.stopMotor()));
     //jButtonClimb.whenPressed(extendClimb.andThen(() -> RobotContainer.climber.stopMotor()));
   }
