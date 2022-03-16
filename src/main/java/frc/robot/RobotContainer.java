@@ -75,6 +75,8 @@ public class RobotContainer {
   public static MotorControllerGroup rightGroup;
   public static MotorControllerGroup leftGroup;
 
+  public static MotorControllerGroup shooterGroup;
+
   // DifferentialDrive is what actually performs the movements 
   public static DifferentialDrive myRobot;
 
@@ -100,9 +102,9 @@ public class RobotContainer {
     xButtonResetAngle.whenPressed(resetAngle);
     jButtonContract.whenPressed(contract);
     jButtonExtend.whenPressed(extend);
-    jButtonShoot.toggleWhenActive(shoot.andThen(() -> RobotContainer.frontShooter.stopMotor()));
-    jButtonShoot.toggleWhenActive(shoot.andThen(() -> RobotContainer.backShooter.stopMotor()))
-    jButtonClimb.whenPressed(extendClimb.andThen(() -> RobotContainer.climber.stopMotor()));
+    jButtonShoot.toggleWhenPressed(shoot);
+    //jButtonShoot.toggleWhenActive(shoot.andThen(() -> RobotContainer.backShooter.stopMotor()));
+    //jButtonClimb.whenPressed(extendClimb.andThen(() -> RobotContainer.climber.stopMotor()));
   }
 
   /**

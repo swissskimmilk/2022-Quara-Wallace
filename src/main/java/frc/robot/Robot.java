@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+import java.rmi.server.RemoteObjectInvocationHandler;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
@@ -71,6 +74,8 @@ public class Robot extends TimedRobot {
     RobotContainer.snapLeft = new SnapLeft(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.calibrate = new Calibrate(RobotContainer.IMU, RobotContainer.drivetrain);
     RobotContainer.resetAngle = new ResetAngle(RobotContainer.IMU);
+    RobotContainer.mIntake = new Intake();
+    RobotContainer.shoot = new Shoot(RobotContainer.mIntake);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
@@ -90,7 +95,9 @@ public class Robot extends TimedRobot {
     RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
     RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
     RobotContainer.frontShooter = new WPI_VictorSPX(Constants.frontShootMotorPort);
-    RobotContainer.backShooter = new WPI_VictorSPX(Constants.backShooterMotorPort)
+    RobotContainer.backShooter = new WPI_VictorSPX(Constants.backShooterMotorPort);
+    //RobotContainer.shooterGroup = new MotorControllerGroup(RobotContainer.frontShooter, RobotContainer.backShooter);
+    RobotContainer.shooterGroup = new MotorControllerGroup(RobotContainer.backShooter);
 
     // Climb
     RobotContainer.climber = new WPI_VictorSPX(Constants.climbPort);

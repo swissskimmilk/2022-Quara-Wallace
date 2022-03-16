@@ -9,6 +9,8 @@ import frc.robot.subsystems.Intake;
 
 public class Shoot extends CommandBase{
     private Intake subSysIntake;
+    private boolean shooting = false;
+    private boolean finished = false;
 
     public Shoot(Intake mIntake)
     {
@@ -18,18 +20,23 @@ public class Shoot extends CommandBase{
 
     @Override
     public void initialize() {
-        RobotContainer.frontShooter.set(Constants.shooterSpeed);
-        RobotContainer.backShooter.set(Constants.shooterSpeed);
+        RobotContainer.shooterGroup.set(Constants.shooterSpeed);
 
     }
 
-    public void excecute() {
-        
+    @Override
+    public void execute() {
     }
 
     @Override
     public boolean isFinished() {
         // command ends when toggled instead
-        return false;
+        return finished;
+    }
+
+    @Override 
+    public void end(boolean interrupted) {
+        System.out.println("stopped");
+        RobotContainer.shooterGroup.stopMotor();
     }
 }

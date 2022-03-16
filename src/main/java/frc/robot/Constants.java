@@ -106,8 +106,8 @@ public final class Constants {
     public static final int rightActuatorPort = 1;
 
     // Shoot ports
-    public static final int frontShootMotorPort = 2;
-    public static final int backShooterMotorPort = 4;
+    public static final int frontShootMotorPort = 15;
+    public static final int backShooterMotorPort = 2;
 
 
     // Shooting speed
@@ -115,7 +115,7 @@ public final class Constants {
 
     // Climb port
 
-    public static final int climbPort = 3;
+    public static final int climbPort = 4;
 
 
 
