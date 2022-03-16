@@ -39,7 +39,7 @@ public final class Constants {
 
         // Shoot button (spin wheels)
         public static final int shootButton = 3;
-        public static final int stopShootButton = 2;
+        public static final int stopShootButton = 4;
 
         // climb button
         public static final int climbButton = 4;
