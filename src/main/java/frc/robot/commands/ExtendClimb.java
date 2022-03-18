@@ -15,7 +15,7 @@ public class ExtendClimb extends CommandBase {
 
     @Override
     public void initialize() {
-        RobotContainer.climber.set(Constants.climbSpeed);
+        RobotContainer.climberMotor.set(Constants.climbSpeed);
     }
 
     @Override

@@ -44,7 +44,11 @@ public class SnapLeft extends CommandBase {
     } else if (initAngle > (90 - Constants.angleTolerance)) {
       newAngle = 180;
     } else {
+<<<<<<< HEAD
       newAngle = 90;
+=======
+      newAngle = 360;
+>>>>>>> 49d48f3369812a23a141bd0f8aeb56bf93bc659e
     }
 
     System.out.println("Turning to: " + angleFormat.format(newAngle));

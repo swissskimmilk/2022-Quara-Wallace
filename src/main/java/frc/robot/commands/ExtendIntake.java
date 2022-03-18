@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 
-public class Extend extends CommandBase {
+public class ExtendIntake extends CommandBase {
     private Intake subSysIntake;
     
-    public Extend(Intake mIntake) {
+    public ExtendIntake(Intake mIntake) {
         addRequirements(mIntake);
         subSysIntake = mIntake;
     }
