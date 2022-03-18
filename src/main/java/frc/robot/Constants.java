@@ -123,4 +123,8 @@ public final class Constants {
 
     // Climbing speed 
     public static final double climbSpeed = 0.5; 
+
+    // movement speed while autonmous 
+    public static final double autonSpeed = -0.5;
+    public static final double extendTime = 2;
 }
