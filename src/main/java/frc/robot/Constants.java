@@ -6,47 +6,52 @@ import edu.wpi.first.wpilibj.XboxController;
 
 // Stores constants (duh)
 public final class Constants {
-    // The ids for the motors 
+    
+    // The ids for the main motors
     public static final int RightLeader = 0;
     public static final int RightFollower = 3;
     public static final int LeftLeader = 1;
     public static final int LeftFollower = 4;
 
-    // The id for the joystick 
-    public static final int joystick = 0;
+    // The id for the XboxController
+    public static final int xboxController = 1;
 
-    // joystick button ids:
+    // XboxController button ids:
 
-        // left and right bumper
+        // x and b buttons
         public static final int leftTurnButton = 3;
         public static final int rightTurnButton = 2;
 
-        // left/right stick click to snap turn left and right
+        // left and right joystick buttons 
         public static final int snapLeftButton = 9;
         public static final int snapRightButton = 10;
 
         // y button, to calibrate imu
-        public static final int calibrateButton = 4;
+        //public static final int calibrateButton = 4;
+        public static final int stopIntakeButton = 4;
 
         // start button, to reset/recalibrate imu angle
         public static final int resetAngleButton = 8;
 
-        // button to contract linear actuator. 5 button on the joystick
-        public static final int contractButton = 5;
+    // The id for the joystick 
+    public static final int joystick = 0;
 
-        // extend linear actuator, 6 on joystick
-        public static final int extendButton = 6;
+    // Joystick buttons 
 
-        // Shoot button (spin wheels)
-        public static final int shootButton = 3;
-        public static final int stopShootButton = 4;
+        // button to contract linear actuator
+        public static final int extendButton = 5;
+        public static final int contractButton = 3;
 
-        // climb button
-        public static final int climbButton = 4;
+        // Joystick trigger 
+        public static final int shootButton = 1;
 
+        // Side trigger 
+        public static final int suckButton = 2;
 
-    // The id for the XboxController
-    public static final int xboxController = 1;
+        // climb buttons
+        public static final int extendClimbButton = 6;
+        public static final int retractClimbButton = 4;
+
     
     // Constants for movement  
     public enum DriveMode {
@@ -107,12 +112,15 @@ public final class Constants {
     public static final int rightActuatorPort = 1;
 
     // Shoot ports
-    public static final int frontShootMotorPort = 15;
-    public static final int backShooterMotorPort = 2;
+    public static final int topShootMotorPort = 2;
+    public static final int bottomShooterMotorPort = ;
 
     // Shooting speed
     public static final double shooterSpeed = 0.5;
 
     // Climb port
-    public static final int climbPort = 4;
+    public static final int climbPort = ;
+
+    // Climbing speed 
+    public static final double climbSpeed = 0.5; 
 }

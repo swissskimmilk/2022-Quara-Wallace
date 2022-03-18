@@ -27,13 +27,16 @@ public class RobotContainer {
   public static JoystickButton xButtonRightTurn;
   public static JoystickButton xButtonSnapRight;
   public static JoystickButton xButtonSnapLeft;
-  public static JoystickButton xButtonCalibrate;
+  //public static JoystickButton xButtonCalibrate;
+  public static JoystickButton xButtonStopIntake;
   public static JoystickButton xButtonResetAngle;
-  public static JoystickButton jButtonContract;
-  public static JoystickButton jButtonExtend;
+
+  public static JoystickButton jButtonContractIntake;
+  public static JoystickButton jButtonExtendIntake;
   public static JoystickButton jButtonShoot;
-  public static JoystickButton jButtonStopShoot;
-  public static JoystickButton jButtonClimb; 
+  public static JoystickButton jButtonSuck;
+  public static JoystickButton jButtonExtendClimb; 
+  public static JoystickButton jButtonRetractClimb; 
 
   // imu subsystem
   public static IMU IMU;
@@ -53,31 +56,31 @@ public class RobotContainer {
 
   // intake 
   public static Intake mIntake;
-  public static Extend extend;
-  public static Contract contract;
+  public static ExtendIntake extendIntake;
+  public static ContractIntake contractIntake;
   public static Servo leftActuator;
   public static Servo rightActuator;
   public static Shoot shoot;
-  public static StopShoot stopShoot;
+  public static Suck suck;
+  public static StopIntake stopIntake;
 
   // climb
-  public static ExtendClimb extendClimb; 
+  public static Climber climber;
+  public static ExtendClimb extendClimb;
+  public static RetractClimb retractClimb;
 
   // The motors 
   public static WPI_VictorSPX rightLeader;
   public static WPI_VictorSPX rightFollower;
   public static WPI_VictorSPX leftLeader;
   public static WPI_VictorSPX leftFollower;
-  public static WPI_VictorSPX frontShooter;
-  public static WPI_VictorSPX backShooter;
-  public static WPI_VictorSPX climber;
-   
+  public static WPI_VictorSPX topShooter;
+  public static WPI_VictorSPX bottomShooter;
+  public static WPI_VictorSPX climberMotor;
 
   // The groups for the motors 
   public static MotorControllerGroup rightGroup;
-  public static MotorControllerGroup leftGroup;
-
-  public static MotorControllerGroup shooterGroup;
+  public static MotorControllerGroup leftGroup; 
 
   // DifferentialDrive is what actually performs the movements 
   public static DifferentialDrive myRobot;
@@ -100,14 +103,15 @@ public class RobotContainer {
     xButtonRightTurn.whenPressed(rightTurn);
     xButtonSnapRight.whenPressed(snapRight);
     xButtonSnapLeft.whenPressed(snapLeft);
-    xButtonCalibrate.whenPressed(calibrate);
+    //xButtonCalibrate.whenPressed(calibrate);
+    xButtonStopIntake.whenPressed(stopIntake);
     xButtonResetAngle.whenPressed(resetAngle);
-    jButtonContract.whenPressed(contract);
-    jButtonExtend.whenPressed(extend);
+
+    jButtonContractIntake.whenPressed(contractIntake);
+    jButtonExtendIntake.whenPressed(extendIntake);
+    jButtonExtendClimb.whenPressed(retractClimb);
     jButtonShoot.whenPressed(shoot);
-    jButtonStopShoot.whenPressed(stopShoot);
-    //jButtonShoot.toggleWhenActive(shoot.andThen(() -> RobotContainer.backShooter.stopMotor()));
-    //jButtonClimb.whenPressed(extendClimb.andThen(() -> RobotContainer.climber.stopMotor()));
+    jButtonSuck.whenPressed(suck);
   }
 
   /**

@@ -5,17 +5,17 @@ import frc.robot.subsystems.Climber;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
-public class ExtendClimb extends CommandBase {
+public class RetractClimb extends CommandBase {
     Climber subSysClimb;
     
-    public ExtendClimb (Climber mClimb) {
+    public RetractClimb (Climber mClimb) {
         addRequirements(mClimb);
         subSysClimb = mClimb;
     }
 
     @Override
     public void initialize() {
-        RobotContainer.climber.set(Constants.climbSpeed);
+        RobotContainer.climber.set(-Constants.climbSpeed);
     }
 
     @Override

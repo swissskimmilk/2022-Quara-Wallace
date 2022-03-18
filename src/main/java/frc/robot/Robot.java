@@ -51,13 +51,15 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonRightTurn = new JoystickButton(RobotContainer.xController, Constants.rightTurnButton);
     RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.snapRightButton);
     RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
-    RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
+    //RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
+    RobotContainer.xButtonStopIntake = new JoystickButton(RobotContainer.joystick, Constants.stopIntakeButton);
     RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
-    RobotContainer.jButtonContract = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
-    RobotContainer.jButtonExtend = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
+    RobotContainer.jButtonContractIntake = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
+    RobotContainer.jButtonExtendIntake = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
     RobotContainer.jButtonShoot = new JoystickButton(RobotContainer.joystick, Constants.shootButton);
-    RobotContainer.jButtonStopShoot = new JoystickButton(RobotContainer.joystick, Constants.stopShootButton);
-    RobotContainer.jButtonClimb = new JoystickButton(RobotContainer.joystick, Constants.climbButton);
+    RobotContainer.jButtonSuck = new JoystickButton(RobotContainer.joystick, Constants.suckButton);
+    RobotContainer.jButtonExtendClimb = new JoystickButton(RobotContainer.joystick, Constants.extendClimbButton);
+    RobotContainer.jButtonRetractClimb = new JoystickButton(RobotContainer.joystick, Constants.retractClimbButton);
 
     // the actual imu 
     RobotContainer.ADIS_IMU = new ADIS16470_IMU();
@@ -74,10 +76,8 @@ public class Robot extends TimedRobot {
     RobotContainer.snapRight = new SnapRight(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.snapLeft = new SnapLeft(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.calibrate = new Calibrate(RobotContainer.IMU, RobotContainer.drivetrain);
+    RobotContainer.stopIntake = new StopIntake(RobotContainer.mIntake);
     RobotContainer.resetAngle = new ResetAngle(RobotContainer.IMU);
-    RobotContainer.mIntake = new Intake();
-    RobotContainer.shoot = new Shoot(RobotContainer.mIntake);
-    RobotContainer.stopShoot = new StopShoot(RobotContainer.mIntake);
 
     // Create motor objects 
     RobotContainer.rightLeader = new WPI_VictorSPX(Constants.RightLeader);
@@ -92,17 +92,20 @@ public class Robot extends TimedRobot {
 
     // Intake
     RobotContainer.mIntake = new Intake();
-    RobotContainer.contract = new Contract(RobotContainer.mIntake);
-    RobotContainer.extend = new Extend(RobotContainer.mIntake);
+    RobotContainer.shoot = new Shoot(RobotContainer.mIntake);
+    RobotContainer.suck = new Suck(RobotContainer.mIntake);
+    RobotContainer.contractIntake = new ContractIntake(RobotContainer.mIntake);
+    RobotContainer.extendIntake = new ExtendIntake(RobotContainer.mIntake);
     RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
     RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
-    RobotContainer.frontShooter = new WPI_VictorSPX(Constants.frontShootMotorPort);
-    RobotContainer.backShooter = new WPI_VictorSPX(Constants.backShooterMotorPort);
-    //RobotContainer.shooterGroup = new MotorControllerGroup(RobotContainer.frontShooter, RobotContainer.backShooter);
-    RobotContainer.shooterGroup = new MotorControllerGroup(RobotContainer.backShooter);
+    RobotContainer.topShooter = new WPI_VictorSPX(Constants.topShootMotorPort);
+    RobotContainer.bottomShooter = new WPI_VictorSPX(Constants.bottomShooterMotorPort);
 
     // Climb
-    RobotContainer.climber = new WPI_VictorSPX(Constants.climbPort);
+    RobotContainer.climber = new Climber();
+    RobotContainer.climberMotor = new WPI_VictorSPX(Constants.climbPort);
+    RobotContainer.extendClimb = new ExtendClimb(RobotContainer.climber);
+    RobotContainer.retractClimb = new RetractClimb(RobotContainer.climber);
     
     // numbers in order are max pwm in ms, deadband max, center off pulse width, deadband min, min pwm
     RobotContainer.leftActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
