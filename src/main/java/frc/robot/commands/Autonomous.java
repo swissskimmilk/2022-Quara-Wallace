@@ -17,7 +17,7 @@ public class Autonomous extends SequentialCommandGroup {
 
         new Delay(1),
 
-        new StopIntake(RobotContainer.mIntake),
+        new StopIntake(RobotContainer.mIntake, RobotContainer.climber),
 
         new DriveForTime(RobotContainer.drivetrain, 4, false));
   }

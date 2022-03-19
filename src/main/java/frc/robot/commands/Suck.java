@@ -21,7 +21,7 @@ public class Suck extends CommandBase{
 
     @Override
     public void initialize() {
-        RobotContainer.topShooter.set(-Constants.shooterSpeed);
+        RobotContainer.topShooter.set(Constants.shooterSpeed);
         RobotContainer.bottomShooter.set(-Constants.shooterSpeed);
     }
 

@@ -66,14 +66,14 @@ public final class Constants {
     public static final Map<Integer, Double> speedMults = new HashMap<>();
     static {
         speedMults.put(8, -0.5);
-        speedMults.put(10, -0.75);
-        speedMults.put(12, -0.9);
+        speedMults.put(10, -0.7);
+        speedMults.put(12, -0.8);
     }
     public static final Map<Integer, Double> rotMults = new HashMap<>();
     static {
         rotMults.put(7, 0.5);
-        rotMults.put(9, 0.6);
-        rotMults.put(11, 0.7);
+        rotMults.put(9, 0.7);
+        rotMults.put(11, 0.8);
     }
     
     // default movement mults 
@@ -113,16 +113,16 @@ public final class Constants {
 
     // Shoot ports
     public static final int topShootMotorPort = 2;
-    public static final int bottomShooterMotorPort = ;
+    public static final int bottomShooterMotorPort = 5;
 
     // Shooting speed
-    public static final double shooterSpeed = 0.5;
+    public static final double shooterSpeed = 0.75;
 
     // Climb port
-    public static final int climbPort = ;
+    public static final int climbPort = 6;
 
     // Climbing speed 
-    public static final double climbSpeed = 0.5; 
+    public static final double climbSpeed = 1; 
 
     // movement speed while autonmous 
     public static final double autonSpeed = -0.5;

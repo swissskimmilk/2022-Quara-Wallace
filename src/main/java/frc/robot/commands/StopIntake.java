@@ -6,16 +6,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
 
 public class StopIntake extends CommandBase{
     private Intake subSysIntake;
+    private Climber m_Climber;
     private boolean shooting = false;
     private boolean finished = false;
 
-    public StopIntake(Intake mIntake)
+    public StopIntake(Intake mIntake, Climber climber)
     {
-        addRequirements(mIntake);
         subSysIntake = mIntake;
+        m_Climber = climber;
+        addRequirements(subSysIntake, m_Climber);
     }
 
     @Override

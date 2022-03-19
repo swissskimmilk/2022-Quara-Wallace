@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
     RobotContainer.xButtonSnapRight = new JoystickButton(RobotContainer.xController, Constants.snapRightButton);
     RobotContainer.xButtonSnapLeft = new JoystickButton(RobotContainer.xController, Constants.snapLeftButton);
     //RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
-    RobotContainer.xButtonStopIntake = new JoystickButton(RobotContainer.joystick, Constants.stopIntakeButton);
+    RobotContainer.xButtonStopIntake = new JoystickButton(RobotContainer.xController, Constants.stopIntakeButton);
     RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
     RobotContainer.jButtonContractIntake = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
     RobotContainer.jButtonExtendIntake = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
@@ -76,7 +76,6 @@ public class Robot extends TimedRobot {
     RobotContainer.snapRight = new SnapRight(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.snapLeft = new SnapLeft(RobotContainer.drivetrain, RobotContainer.IMU);
     RobotContainer.calibrate = new Calibrate(RobotContainer.IMU, RobotContainer.drivetrain);
-    RobotContainer.stopIntake = new StopIntake(RobotContainer.mIntake);
     RobotContainer.resetAngle = new ResetAngle(RobotContainer.IMU);
 
     // Create motor objects 
@@ -100,13 +99,13 @@ public class Robot extends TimedRobot {
     RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
     RobotContainer.topShooter = new WPI_VictorSPX(Constants.topShootMotorPort);
     RobotContainer.bottomShooter = new WPI_VictorSPX(Constants.bottomShooterMotorPort);
-
     // Climb
     RobotContainer.climber = new Climber();
     RobotContainer.climberMotor = new WPI_VictorSPX(Constants.climbPort);
     RobotContainer.extendClimb = new ExtendClimb(RobotContainer.climber);
     RobotContainer.retractClimb = new RetractClimb(RobotContainer.climber);
-    
+    RobotContainer.stopIntake = new StopIntake(RobotContainer.mIntake, RobotContainer.climber);
+
     // numbers in order are max pwm in ms, deadband max, center off pulse width, deadband min, min pwm
     RobotContainer.leftActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
     RobotContainer.rightActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);

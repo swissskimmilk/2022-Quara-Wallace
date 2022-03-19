@@ -99,17 +99,19 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    xButtonLeftTurn.whenPressed(leftTurn);
-    xButtonRightTurn.whenPressed(rightTurn);
-    xButtonSnapRight.whenPressed(snapRight);
-    xButtonSnapLeft.whenPressed(snapLeft);
+    //xButtonLeftTurn.whenPressed(leftTurn);
+    //xButtonRightTurn.whenPressed(rightTurn);
+    //xButtonSnapRight.whenPressed(snapRight);
+    //xButtonSnapLeft.whenPressed(snapLeft);
     //xButtonCalibrate.whenPressed(calibrate);
     xButtonStopIntake.whenPressed(stopIntake);
     xButtonResetAngle.whenPressed(resetAngle);
-
+  
     jButtonContractIntake.whenPressed(contractIntake);
     jButtonExtendIntake.whenPressed(extendIntake);
-    jButtonExtendClimb.whenPressed(retractClimb);
+    jButtonExtendClimb.whenPressed(extendClimb);
+    jButtonRetractClimb.whenPressed(retractClimb);
+    
     jButtonShoot.whenPressed(shoot);
     jButtonSuck.whenPressed(suck);
   }
