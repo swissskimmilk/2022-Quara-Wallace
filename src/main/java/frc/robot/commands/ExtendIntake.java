@@ -14,8 +14,8 @@ public class ExtendIntake extends CommandBase {
 
     @Override
     public void initialize() {
-        RobotContainer.leftActuator.set(1);
-        RobotContainer.rightActuator.set(1);
+        // RobotContainer.leftActuator.set(1);
+        // RobotContainer.rightActuator.set(1);
     }
 
     @Override

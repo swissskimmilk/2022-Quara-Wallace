@@ -23,8 +23,8 @@ public class StopIntake extends CommandBase{
 
     @Override
     public void initialize() {
-        RobotContainer.topShooter.stopMotor();
-        RobotContainer.bottomShooter.stopMotor();
+        // RobotContainer.topShooter.stopMotor();
+        // RobotContainer.bottomShooter.stopMotor();
         RobotContainer.climberMotor.stopMotor();
     }
 

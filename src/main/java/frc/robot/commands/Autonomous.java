@@ -7,18 +7,14 @@ import frc.robot.RobotContainer;
 public class Autonomous extends SequentialCommandGroup {
   public Autonomous() {
     addCommands(
-        new DriveForTime(RobotContainer.drivetrain, 1, true),
-        
-        new ExtendIntake(RobotContainer.mIntake),
+        //new DriveForTime(RobotContainer.drivetrain, 1, true),
 
-        new Delay(Constants.extendTime),
+        // new Shoot(RobotContainer.mIntake),
 
-        new Shoot(RobotContainer.mIntake),
+        // new Delay(3),
 
-        new Delay(1),
+        // new StopIntake(RobotContainer.mIntake, RobotContainer.climber),
 
-        new StopIntake(RobotContainer.mIntake, RobotContainer.climber),
-
-        new DriveForTime(RobotContainer.drivetrain, 4, false));
+        new DriveForTime(RobotContainer.drivetrain, 3, false));
   }
 }

@@ -54,10 +54,10 @@ public class Robot extends TimedRobot {
     //RobotContainer.xButtonCalibrate = new JoystickButton(RobotContainer.xController, Constants.calibrateButton);
     RobotContainer.xButtonStopIntake = new JoystickButton(RobotContainer.xController, Constants.stopIntakeButton);
     RobotContainer.xButtonResetAngle = new JoystickButton(RobotContainer.xController, Constants.resetAngleButton);
-    RobotContainer.jButtonContractIntake = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
-    RobotContainer.jButtonExtendIntake = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
-    RobotContainer.jButtonShoot = new JoystickButton(RobotContainer.joystick, Constants.shootButton);
-    RobotContainer.jButtonSuck = new JoystickButton(RobotContainer.joystick, Constants.suckButton);
+    // RobotContainer.jButtonContractIntake = new JoystickButton(RobotContainer.joystick, Constants.contractButton);
+    // RobotContainer.jButtonExtendIntake = new JoystickButton(RobotContainer.joystick, Constants.extendButton);
+    // RobotContainer.jButtonShoot = new JoystickButton(RobotContainer.joystick, Constants.shootButton);
+    // RobotContainer.jButtonSuck = new JoystickButton(RobotContainer.joystick, Constants.suckButton);
     RobotContainer.jButtonExtendClimb = new JoystickButton(RobotContainer.joystick, Constants.extendClimbButton);
     RobotContainer.jButtonRetractClimb = new JoystickButton(RobotContainer.joystick, Constants.retractClimbButton);
 
@@ -91,24 +91,25 @@ public class Robot extends TimedRobot {
 
     // Intake
     RobotContainer.mIntake = new Intake();
-    RobotContainer.shoot = new Shoot(RobotContainer.mIntake);
-    RobotContainer.suck = new Suck(RobotContainer.mIntake);
-    RobotContainer.contractIntake = new ContractIntake(RobotContainer.mIntake);
-    RobotContainer.extendIntake = new ExtendIntake(RobotContainer.mIntake);
-    RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
-    RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
-    RobotContainer.topShooter = new WPI_VictorSPX(Constants.topShootMotorPort);
-    RobotContainer.bottomShooter = new WPI_VictorSPX(Constants.bottomShooterMotorPort);
-    // Climb
+    // RobotContainer.shoot = new Shoot(RobotContainer.mIntake);
+    // RobotContainer.suck = new Suck(RobotContainer.mIntake);
+    // RobotContainer.contractIntake = new ContractIntake(RobotContainer.mIntake);
+    // RobotContainer.extendIntake = new ExtendIntake(RobotContainer.mIntake);
+    // RobotContainer.leftActuator = new Servo(Constants.leftActuatorPort);
+    // RobotContainer.rightActuator = new Servo(Constants.rightActuatorPort);
+    // RobotContainer.topShooter = new WPI_VictorSPX(Constants.topShootMotorPort);
+    // RobotContainer.bottomShooter = new WPI_VictorSPX(Constants.bottomShooterMotorPort);
+    // // Climb
     RobotContainer.climber = new Climber();
     RobotContainer.climberMotor = new WPI_VictorSPX(Constants.climbPort);
     RobotContainer.extendClimb = new ExtendClimb(RobotContainer.climber);
     RobotContainer.retractClimb = new RetractClimb(RobotContainer.climber);
+    // stop climb only
     RobotContainer.stopIntake = new StopIntake(RobotContainer.mIntake, RobotContainer.climber);
 
     // numbers in order are max pwm in ms, deadband max, center off pulse width, deadband min, min pwm
-    RobotContainer.leftActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
-    RobotContainer.rightActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
+    // RobotContainer.leftActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
+    // RobotContainer.rightActuator.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
 
     m_robotContainer = new RobotContainer();
   }

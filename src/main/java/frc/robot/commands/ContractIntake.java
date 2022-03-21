@@ -14,8 +14,8 @@ public class ContractIntake extends CommandBase {
     
     @Override
     public void initialize() {
-        RobotContainer.leftActuator.set(0);
-        RobotContainer.rightActuator.set(0);    
+        // RobotContainer.leftActuator.set(0);
+        // RobotContainer.rightActuator.set(0);    
     }
 
     @Override

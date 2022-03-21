@@ -10,6 +10,7 @@ public class Delay extends CommandBase {
   public Delay(double time) {
     m_Time = time;
     m_Timer = new Timer();
+    m_Timer.start();
   }
 
   @Override

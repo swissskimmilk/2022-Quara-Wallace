@@ -65,20 +65,20 @@ public final class Constants {
     // Key is the button and the value is the mult 
     public static final Map<Integer, Double> speedMults = new HashMap<>();
     static {
-        speedMults.put(8, -0.5);
-        speedMults.put(10, -0.7);
-        speedMults.put(12, -0.8);
+        speedMults.put(8, -0.9);
+        speedMults.put(10, -1.0);
+        speedMults.put(12, -1.25);
     }
     public static final Map<Integer, Double> rotMults = new HashMap<>();
     static {
-        rotMults.put(7, 0.5);
-        rotMults.put(9, 0.7);
-        rotMults.put(11, 0.8);
+        rotMults.put(7, 0.7);
+        rotMults.put(9, 0.9);
+        rotMults.put(11, 1.1);
     }
     
     // default movement mults 
-    public static final double defSpdMult = -0.75;
-    public static final double detRotMult = 0.6;
+    public static final double defSpdMult = -1.0;
+    public static final double detRotMult = 0.9;
 
     // automatic turning speed multiplier for 90 degree turns
     public static final double autoTurnMult = 0.01;
@@ -125,6 +125,6 @@ public final class Constants {
     public static final double climbSpeed = 1; 
 
     // movement speed while autonmous 
-    public static final double autonSpeed = -0.5;
+    public static final double autonSpeed = 0.65;
     public static final double extendTime = 2;
 }

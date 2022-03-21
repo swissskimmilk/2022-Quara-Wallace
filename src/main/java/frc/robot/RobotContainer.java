@@ -31,10 +31,10 @@ public class RobotContainer {
   public static JoystickButton xButtonStopIntake;
   public static JoystickButton xButtonResetAngle;
 
-  public static JoystickButton jButtonContractIntake;
-  public static JoystickButton jButtonExtendIntake;
-  public static JoystickButton jButtonShoot;
-  public static JoystickButton jButtonSuck;
+  // public static JoystickButton jButtonContractIntake;
+  // public static JoystickButton jButtonExtendIntake;
+  // public static JoystickButton jButtonShoot;
+  // public static JoystickButton jButtonSuck;
   public static JoystickButton jButtonExtendClimb; 
   public static JoystickButton jButtonRetractClimb; 
 
@@ -56,12 +56,12 @@ public class RobotContainer {
 
   // intake 
   public static Intake mIntake;
-  public static ExtendIntake extendIntake;
-  public static ContractIntake contractIntake;
-  public static Servo leftActuator;
-  public static Servo rightActuator;
-  public static Shoot shoot;
-  public static Suck suck;
+  // public static ExtendIntake extendIntake;
+  // public static ContractIntake contractIntake;
+  // public static Servo leftActuator;
+  // public static Servo rightActuator;
+  // public static Shoot shoot;
+  // public static Suck suck;
   public static StopIntake stopIntake;
 
   // climb
@@ -74,8 +74,8 @@ public class RobotContainer {
   public static WPI_VictorSPX rightFollower;
   public static WPI_VictorSPX leftLeader;
   public static WPI_VictorSPX leftFollower;
-  public static WPI_VictorSPX topShooter;
-  public static WPI_VictorSPX bottomShooter;
+  // public static WPI_VictorSPX topShooter;
+  // public static WPI_VictorSPX bottomShooter;
   public static WPI_VictorSPX climberMotor;
 
   // The groups for the motors 
@@ -107,13 +107,13 @@ public class RobotContainer {
     xButtonStopIntake.whenPressed(stopIntake);
     xButtonResetAngle.whenPressed(resetAngle);
   
-    jButtonContractIntake.whenPressed(contractIntake);
-    jButtonExtendIntake.whenPressed(extendIntake);
+    // jButtonContractIntake.whenPressed(contractIntake);
+    // jButtonExtendIntake.whenPressed(extendIntake);
     jButtonExtendClimb.whenPressed(extendClimb);
     jButtonRetractClimb.whenPressed(retractClimb);
     
-    jButtonShoot.whenPressed(shoot);
-    jButtonSuck.whenPressed(suck);
+    // jButtonShoot.whenPressed(shoot);
+    // jButtonSuck.whenPressed(suck);
   }
 
   /**

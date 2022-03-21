@@ -16,6 +16,7 @@ public class DriveForTime extends CommandBase {
     m_Drivetrain = drivetrain;
     m_Time = time;
     m_Timer = new Timer();
+    m_Timer.start();
     m_Forward = forward;
     addRequirements(drivetrain);
   }
@@ -26,12 +27,14 @@ public class DriveForTime extends CommandBase {
         RobotContainer.myRobot.arcadeDrive(0, Constants.autonSpeed);
     }
     else {
+      System.out.println("Driving backwardsw at " + -Constants.autonSpeed);
         RobotContainer.myRobot.arcadeDrive(0, -Constants.autonSpeed);
     }
   }
 
   @Override
   public boolean isFinished() {
+    System.out.println("Time " + m_Timer.get());
     return m_Timer.hasElapsed(m_Time);
   }
 }
